@@ -1,0 +1,2792 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="CONTENT-TYPE"/>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+<meta content="eddf55e0b7cc67a1be7ce051e1035f7d89c69b6d" name="version"/>
+<meta content="NO-CACHE" http-equiv="CACHE-CONTROL"/>
+<meta content="NO-CACHE" http-equiv="PRAGMA"/>
+
+<title>NCAA Statistics</title>
+<!-- Bootstrap core CSS -->
+<!--
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+-->
+<!--
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.bootstrap4.css" crossorigin="anonymous">
+-->
+
+
+<!--
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+-->
+<!--
+<script src="https://cdn.datatables.net/2.0.0/js/dataTables.bootstrap4.js" crossorigin="anonymous"></script>
+-->
+
+
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body onload="if (top != self) { top.location=self.location; }" style="font-size: .75rem;">
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light header-dark-border-color py-0">
+<a aria-label="statistics" class="navbar-brand mr-0 mr-md-2" href="/">
+<img alt="NCAA" src="/assets/ncaa-fbc4d0406ae731b47babcc3fca53775b5955ef372bf8b8e998ca9a513e468b8f.svg" style="margin-left: 24px; margin-right: 0; margin-top: 6px;"/>
+<span class="dark-blue-font">Statistics</span>
+</a>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light header-dark-border-color py-0" style="background-color: var(--color-dark-blue) !important;">
+<button aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler bg-white" data-target="#navbarTogglerDemo01" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+<ul class="navbar-nav mr-auto mt-2 mt-lg-0 justify-content-center">
+<li class="nav-item dropdown">
+<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle skipMask" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink">
+          Rankings
+        </a>
+<div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
+<a class="dropdown-item" href="/rankings">National Rankings</a>
+<a class="dropdown-item" href="/active_career_leaders">Active Career Leaders</a>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/contests/livestream_scoreboards">Scoreboard</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/selection_rankings/nitty_gritties">Selection Rankings</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/head_coaches">Head Coaches</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/search/players">Players</a>
+</li>
+</ul>
+<form accept-charset="UTF-8" action="/team/index" class="form-inline my-2 my-lg-0" id="change_team_form" method="post" onsubmit="mask('Loading');" style="display:inline;"><input name="utf8" type="hidden" value="✓"/>
+<div style="display:none;">
+<input data-disable-with="Submit" id="sport_btn" name="commit" type="submit" value="Submit"/>
+</div>
+<div class="ui-widget" id="team_autocomplete">
+<input class="form-control mr-sm-2" id="org_name" name="org_name" placeholder="Team Search" style="width:200px; font-size: 12px !important" type="search"/>
+<input id="org_id" name="org_id" type="hidden"/>
+</div>
+</form> </div>
+</nav>
+
+</header>
+<div id="stats_app_dialog" style="display:none;">
+</div>
+<div class="card p-1">
+<div class="card-body application contests p-0">
+<h3 class="card-title p-0"></h3>
+<div class="container-fluid p-0">
+<div class="row align-items-center justify-content-center p-0">
+<div class="col-sm-12 p-0">
+<br/>
+<br/>
+
+<div class="table-responsive">
+<table align="center">
+<tr>
+<td>
+<a class="skipMask" href="/teams/627884" target="TEAMS_WIN"><img alt="Ferrum" class="large_logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//225.gif"/></a>
+</td>
+<td class="grey_text d-none d-sm-table-cell" nowrap="" valign="center">
+<span style="font-size:18px">
+<a class="skipMask" href="/teams/627884" target="TEAMS_WIN">Ferrum Panthers</a>
+</span><br/>
+       2-2, Conf 0-0
+   </td>
+<td class="" valign="center">
+</td>
+<td style="font-size:36px; color: grey" valign="center">
+     57
+   </td>
+<td class="d-none d-md-table-cell" style="padding: 0px 30px 0px 30px">
+<table style="border-collapse: collapse">
+<tr>
+<td class="grey_border_bottom"></td>
+<td align="right" class="grey_text grey_border_bottom" nowrap="" width="20px">1</td>
+<td align="right" class="grey_text grey_border_bottom" nowrap="" width="20px">2</td>
+<td align="right" class="grey_border_bottom" style="font-weight:bold" width="20px">S</td>
+</tr>
+<tr>
+<td>Ferrum</td>
+<td align="right" class="grey_text">26</td>
+<td align="right" class="grey_text">31</td>
+<td align="right" style="font-weight:bold">57</td>
+</tr>
+<tr>
+<td>George Washington</td>
+<td align="right" class="grey_text">42</td>
+<td align="right" class="grey_text">52</td>
+<td align="right" style="font-weight:bold">94</td>
+</tr>
+<tr>
+<td class="grey_text" colspan="4">11/16/2026 12:00 PM</td>
+</tr>
+<tr>
+<td class="grey_text" colspan="4" nowrap="">Charles E. Smith Center (Washington, DC)</td>
+</tr>
+<tr>
+<td class="grey_text" colspan="4" nowrap="">Attendance: 1,737</td>
+</tr>
+</table>
+</td>
+<td>
+<a class="skipMask" href="/teams/627529" target="TEAMS_WIN"><img alt="George Washington" class="large_logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//249.gif"/></a>
+</td>
+<td class="grey_text d-none d-sm-table-cell" nowrap="" valign="center">
+<span style="font-size:18px">
+<a class="skipMask" href="/teams/627529" target="TEAMS_WIN">George Washington Revolutionaries</a>
+</span><br/>
+       5-0, Conf 0-0
+   </td>
+<td class="winner" valign="center">
+</td>
+<td style="font-size:36px; color: black" valign="center">
+     94
+   </td>
+</tr>
+<tr>
+<td class="grey_border_bottom grey_border_top" colspan="10">
+<table cellpadding="10px">
+<tr>
+<td style="font-size: 16px;"><a href="/contests/6643366/box_score">Box Score</a></td>
+<td style="font-size: 16px;"><a href="/contests/6643366/team_stats">Team Stats</a></td>
+<td style="font-size: 16px;">Individual Stats</td>
+<td style="font-size: 16px;"><a href="/contests/6643366/play_by_play">Play By Play</a></td>
+<td style="font-size: 16px;"><a href="/contests/6643366/officials">Officials</a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<br/>
+<div class="row justify-content-md-center">
+<div class="row">
+<div class="col p-2">
+
+<div class="card p-0 table-responsive">
+<div class="card-header" style="background-color: white;">
+<div class="row">
+<div>
+<a class="skipMask" href="/teams/627884" target="TEAM_WIN"><img alt="Ferrum" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//225.gif"/>Ferrum</a>
+</div>
+<div class="ml-auto small"><a class="skipMask" href="javascript:togglePeriodStats(competitor_8669335_year_stat_category_0_data_table);">Period Stats</a></div>
+</div>
+</div>
+<div class="card-body">
+<table class="display dataTable small_font" id="competitor_8669335_year_stat_category_0_data_table">
+<thead>
+<tr>
+<th class="no_padding d-none d-sm-table-cell">#</th>
+<th class="no_padding">Name</th>
+<th class="no_padding d-none d-sm-table-cell">P</th>
+<th class="no_padding">MP</th>
+<th class="no_padding">FGM</th>
+<th class="no_padding">FGA</th>
+<th class="no_padding">FG%</th>
+<th class="no_padding">3FG</th>
+<th class="no_padding">3FGA</th>
+<th class="no_padding">FT</th>
+<th class="no_padding">FTA</th>
+<th class="no_padding">PTS</th>
+<th class="no_padding">ORebs</th>
+<th class="no_padding">DRebs</th>
+<th class="no_padding">Tot<br/>Reb</th>
+<th class="no_padding">AST</th>
+<th class="no_padding">TO</th>
+<th class="no_padding">STL</th>
+<th class="no_padding">BLK</th>
+<th class="no_padding">Fouls</th>
+<th class="no_padding">DQ</th>
+<th class="no_padding">Tech<br/>Fouls</th>
+<th class="no_padding">Bench</th>
+</tr>
+</thead>
+<tbody>
+<tr id="game_player_797964206_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              22
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338046" target="PLAYER_HISTORY">Dezmon Ainsworth</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="2">2:05</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964195_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              15
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338089" target="PLAYER_HISTORY">Gavin Burns</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="4">4:35</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964207_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              25
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338054" target="PLAYER_HISTORY">Mitch Burns</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="15">15:54</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964213_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              1
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338069" target="PLAYER_HISTORY">Jordan Durham</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="12">12:07</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="6">6</td>
+<td class="no_padding" data-order="33.33">33.33</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964200_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              5
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338056" target="PLAYER_HISTORY">Nathan Fife</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              G
+            </td>
+<td class="no_padding" data-order="13">13:24</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="50.00">50.00</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964204_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              4
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338059" target="PLAYER_HISTORY">Alejandro Ford</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="16">16:48</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="75.00">75.00</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="8">8</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964203_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              3
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/11471823" target="PLAYER_HISTORY">Amaris Hunt</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="6">6:34</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964199_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              20
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338060" target="PLAYER_HISTORY">Zech Lilly</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              F
+            </td>
+<td class="no_padding" data-order="7">7:32</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964197_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              21
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338063" target="PLAYER_HISTORY">Tailon Manson</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="23">23:26</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964209_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              7
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338065" target="PLAYER_HISTORY">Myles McDuffie</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="17">17:59</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="5">5</td>
+<td class="no_padding" data-order="40.00">40.00</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="6">6</td>
+<td class="no_padding" data-order="6">6</td>
+<td class="no_padding" data-order="10">10</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964210_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              10
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338066" target="PLAYER_HISTORY">Wisdom Mintz</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="22">22:33</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="5">5</td>
+<td class="no_padding" data-order="60.00">60.00</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="8">8</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964212_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              23
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338067" target="PLAYER_HISTORY">Jackson Sellars</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="17">17:39</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="11">11</td>
+<td class="no_padding" data-order="18.18">18.18</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964215_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              12
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338071" target="PLAYER_HISTORY">Shawn Turner</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="7">7:33</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964201_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              2
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/11481940" target="PLAYER_HISTORY">MJ Winstead</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="10">10:23</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="25.00">25.00</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964216_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              0
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338075" target="PLAYER_HISTORY">Lenair Young</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="10">10:39</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="25.00">25.00</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="5">5</td>
+<td class="no_padding" data-order="6">6</td>
+<td class="no_padding" data-order="7">7</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964196_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              13
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12338078" target="PLAYER_HISTORY">Ramez Zayed</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+</td>
+<td class="no_padding" data-order="10">10:49</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="50.00">50.00</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964219_year_stat_category_0" style="background-color: #f9f9f9 !important">
+<td class="no_padding d-none d-sm-table-cell tbody_border_top" nowrap="">
+</td>
+<td class="no_padding tbody_border_top" nowrap="">
+                TEAM
+            </td>
+<td class="no_padding d-none d-sm-table-cell tbody_border_top" nowrap="">
+</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">1</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">1</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">1</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+</tr>
+<tr id="game_player_797964217_year_stat_category_0" style="background-color: #f9f9f9 !important">
+<td class="no_padding d-none d-sm-table-cell tbody_border_top" nowrap="">
+</td>
+<td class="no_padding tbody_border_top" nowrap="">
+                 Ferrum
+            </td>
+<td class="no_padding d-none d-sm-table-cell tbody_border_top" nowrap="">
+</td>
+<td class="no_padding tbody_border_top" data-order="-">200:00</td>
+<td class="no_padding tbody_border_top" data-order="-">17</td>
+<td class="no_padding tbody_border_top" data-order="-">52</td>
+<td class="no_padding tbody_border_top" data-order="-">32.69</td>
+<td class="no_padding tbody_border_top" data-order="-">3</td>
+<td class="no_padding tbody_border_top" data-order="-">11</td>
+<td class="no_padding tbody_border_top" data-order="-">20</td>
+<td class="no_padding tbody_border_top" data-order="-">30</td>
+<td class="no_padding tbody_border_top" data-order="-">57</td>
+<td class="no_padding tbody_border_top" data-order="-">10</td>
+<td class="no_padding tbody_border_top" data-order="-">12</td>
+<td class="no_padding tbody_border_top" data-order="-">22</td>
+<td class="no_padding tbody_border_top" data-order="-">7</td>
+<td class="no_padding tbody_border_top" data-order="-">14</td>
+<td class="no_padding tbody_border_top" data-order="-">13</td>
+<td class="no_padding tbody_border_top" data-order="-">1</td>
+<td class="no_padding tbody_border_top" data-order="-">21</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">29</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+<div class="col p-2">
+
+<div class="card p-0 table-responsive">
+<div class="card-header" style="background-color: white;">
+<div class="row">
+<div>
+<a class="skipMask" href="/teams/627529" target="TEAM_WIN"><img alt="George Washington" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//249.gif"/>George Washington</a>
+</div>
+<div class="ml-auto small"><a class="skipMask" href="javascript:togglePeriodStats(competitor_8669336_year_stat_category_0_data_table);">Period Stats</a></div>
+</div>
+</div>
+<div class="card-body">
+<table class="display dataTable small_font" id="competitor_8669336_year_stat_category_0_data_table">
+<thead>
+<tr>
+<th class="no_padding d-none d-sm-table-cell">#</th>
+<th class="no_padding">Name</th>
+<th class="no_padding d-none d-sm-table-cell">P</th>
+<th class="no_padding">MP</th>
+<th class="no_padding">FGM</th>
+<th class="no_padding">FGA</th>
+<th class="no_padding">FG%</th>
+<th class="no_padding">3FG</th>
+<th class="no_padding">3FGA</th>
+<th class="no_padding">FT</th>
+<th class="no_padding">FTA</th>
+<th class="no_padding">PTS</th>
+<th class="no_padding">ORebs</th>
+<th class="no_padding">DRebs</th>
+<th class="no_padding">Tot<br/>Reb</th>
+<th class="no_padding">AST</th>
+<th class="no_padding">TO</th>
+<th class="no_padding">STL</th>
+<th class="no_padding">BLK</th>
+<th class="no_padding">Fouls</th>
+<th class="no_padding">DQ</th>
+<th class="no_padding">Tech<br/>Fouls</th>
+<th class="no_padding">Bench</th>
+</tr>
+</thead>
+<tbody>
+<tr id="game_player_797964175_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              7
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/11475615" target="PLAYER_HISTORY">Jean Aranguren</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              G
+            </td>
+<td class="no_padding" data-order="11">11:15</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="33.33">33.33</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="5">5</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964171_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              23
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12145028" target="PLAYER_HISTORY">Terrance Arceneaux</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              G
+            </td>
+<td class="no_padding" data-order="11">11:15</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964181_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              5
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12145030" target="PLAYER_HISTORY">Malachi Arrington</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              C
+            </td>
+<td class="no_padding" data-order="6">6:54</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="100.00">100.00</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="6">6</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964182_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              3
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12145031" target="PLAYER_HISTORY">Ryder Frost</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              F
+            </td>
+<td class="no_padding" data-order="20">20:09</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="8">8</td>
+<td class="no_padding" data-order="25.00">25.00</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="8">8</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="6">6</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964173_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              11
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12145032" target="PLAYER_HISTORY">Dylan James</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              F
+            </td>
+<td class="no_padding" data-order="12">12:49</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="100.00">100.00</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="6">6</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964179_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              4
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12145033" target="PLAYER_HISTORY">Felix Kossaras</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              G
+            </td>
+<td class="no_padding" data-order="15">15:55</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="7">7</td>
+<td class="no_padding" data-order="57.14">57.14</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="5">5</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="10">10</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964187_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              39
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12145034" target="PLAYER_HISTORY">Deng Manyang</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              F
+            </td>
+<td class="no_padding" data-order="11">11:10</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="100.00">100.00</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="10">10</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="5">5</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964188_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              8
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12145035" target="PLAYER_HISTORY">Promis N'Landu</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              G
+            </td>
+<td class="no_padding" data-order="24">24:51</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="5">5</td>
+<td class="no_padding" data-order="60.00">60.00</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="10">10</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="6">6</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964176_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              21
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12145258" target="PLAYER_HISTORY">Andrew Phillips</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              F
+            </td>
+<td class="no_padding" data-order="21">21:16</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="6">6</td>
+<td class="no_padding" data-order="50.00">50.00</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="6">6</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="9">9</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="6">6</td>
+<td class="no_padding" data-order="7">7</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964189_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              10
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12145036" target="PLAYER_HISTORY">Jayvon Rampersant</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              F
+            </td>
+<td class="no_padding" data-order="9">9:25</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="7">7</td>
+<td class="no_padding" data-order="57.14">57.14</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="8">8</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964184_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              1
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/11478107" target="PLAYER_HISTORY">Jalen Rougier-Roane</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              G
+            </td>
+<td class="no_padding" data-order="10">10:02</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="6">6</td>
+<td class="no_padding" data-order="33.33">33.33</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="5">5</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964190_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              13
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12145038" target="PLAYER_HISTORY">Lovro Urbiha</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              F
+            </td>
+<td class="no_padding" data-order="11">11:15</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="50.00">50.00</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964178_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              19
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12145039" target="PLAYER_HISTORY">Andrija Vukovic</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              F
+            </td>
+<td class="no_padding" data-order="20">20:17</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="7">7</td>
+<td class="no_padding" data-order="57.14">57.14</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="10">10</td>
+<td class="no_padding" data-order="5">5</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="9">9</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964185_year_stat_category_0">
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              0
+            </td>
+<td class="no_padding" nowrap="">
+<a class="skipMask" href="/players/12145040" target="PLAYER_HISTORY">Omari Witherspoon</a>
+</td>
+<td class="no_padding d-none d-sm-table-cell" nowrap="">
+              G
+            </td>
+<td class="no_padding" data-order="13">13:27</td>
+<td class="no_padding" data-order="5">5</td>
+<td class="no_padding" data-order="6">6</td>
+<td class="no_padding" data-order="83.33">83.33</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="3">3</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="12">12</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="4">4</td>
+<td class="no_padding" data-order="2">2</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="1">1</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+<td class="no_padding" data-order="0">0</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr id="game_player_797964193_year_stat_category_0" style="background-color: #f9f9f9 !important">
+<td class="no_padding d-none d-sm-table-cell tbody_border_top" nowrap="">
+</td>
+<td class="no_padding tbody_border_top" nowrap="">
+                TEAM
+            </td>
+<td class="no_padding d-none d-sm-table-cell tbody_border_top" nowrap="">
+</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">1</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">1</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+<td class="no_padding tbody_border_top" data-order="-">0</td>
+</tr>
+<tr id="game_player_797964191_year_stat_category_0" style="background-color: #f9f9f9 !important">
+<td class="no_padding d-none d-sm-table-cell tbody_border_top" nowrap="">
+</td>
+<td class="no_padding tbody_border_top" nowrap="">
+                 George Washington
+            </td>
+<td class="no_padding d-none d-sm-table-cell tbody_border_top" nowrap="">
+</td>
+<td class="no_padding tbody_border_top" data-order="-">200:00</td>
+<td class="no_padding tbody_border_top" data-order="-">36</td>
+<td class="no_padding tbody_border_top" data-order="-">66</td>
+<td class="no_padding tbody_border_top" data-order="-">54.55</td>
+<td class="no_padding tbody_border_top" data-order="-">13</td>
+<td class="no_padding tbody_border_top" data-order="-">36</td>
+<td class="no_padding tbody_border_top" data-order="-">9</td>
+<td class="no_padding tbody_border_top" data-order="-">16</td>
+<td class="no_padding tbody_border_top" data-order="-">94</td>
+<td class="no_padding tbody_border_top" data-order="-">22</td>
+<td class="no_padding tbody_border_top" data-order="-">28</td>
+<td class="no_padding tbody_border_top" data-order="-">50</td>
+<td class="no_padding tbody_border_top" data-order="-">22</td>
+<td class="no_padding tbody_border_top" data-order="-">18</td>
+<td class="no_padding tbody_border_top" data-order="-">7</td>
+<td class="no_padding tbody_border_top" data-order="-">6</td>
+<td class="no_padding tbody_border_top" data-order="-">22</td>
+<td class="no_padding tbody_border_top" data-order="-">1</td>
+<td class="no_padding tbody_border_top" data-order="-">1</td>
+<td class="no_padding tbody_border_top" data-order="-">73</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer>©  NCAA <a href="https://www.ncaa.org/terms-of-service/" target="_blank" title="Terms and Conditions">Terms and Conditions</a> | <a href="https://www.ncaa.org/privacy-policy/" target="_blank" title="Our Privacy Policy">Privacy Policy</a> | <a href="mailto:ncaastats@ncaa.org">Contact Us</a> </footer>
+<!-- /.container -->
+</body>
+
+</html>

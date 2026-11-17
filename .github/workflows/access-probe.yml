@@ -1,0 +1,63 @@
+# Stage 3 cloud side of the local vs. cloud access comparison (docs/stage3_access_test_plan.md).
+# Manual trigger only. Without the exact approval text, it runs the offline tests and a
+# dry run, and sends no probe requests. The probe itself checks robots.txt per host,
+# waits >= 10 s per host and >= 600 s between rounds, and stops a host on
+# 401/403/429/Retry-After/challenge/login pages.
+name: Stage 3 access probe (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      approve_network_requests:
+        description: "Type APPROVED to send the probe's requests (anything else = offline tests + dry run only)"
+        required: true
+        default: "no"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: access-probe
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    # GitHub-hosted Ubuntu runner, default region chosen by GitHub. GitHub does not
+    # publish the runner's region, so it is recorded as "unknown".
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      PROBE_ENVIRONMENT: cloud-github-actions-ubuntu
+      PROBE_REGION: unknown
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Offline tests (no probe network access)
+        run: python -m unittest discover -s tests
+
+      - name: Dry run (prints the planned requests; no network access)
+        run: python -m src.main probe --environment "$PROBE_ENVIRONMENT" --region "$PROBE_REGION" --output probe-logs
+
+      - name: Probe (sends requests; only with explicit approval)
+        if: ${{ inputs.approve_network_requests == 'APPROVED' }}
+        run: python -m src.main probe --execute --environment "$PROBE_ENVIRONMENT" --region "$PROBE_REGION" --output probe-logs
+
+      - name: Upload probe logs
+        if: ${{ always() && inputs.approve_network_requests == 'APPROVED' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: access-probe-logs-${{ github.run_id }}
+          path: probe-logs/
+          if-no-files-found: warn
+          retention-days: 30

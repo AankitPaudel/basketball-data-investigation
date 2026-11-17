@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "provenance": "synthetic",
+  "season": "2026-27",
+  "ncaa_season_id": null,
+  "sport": "MBB",
+  "extracted_at": "2026-11-16T20:00:00+00:00",
+  "notice": "Entirely fictional normalized input. This is our bundle format, not a real NCAA API schema.",
+  "games": [{
+    "game_id": "SYNTHETIC-G1",
+    "status": "final",
+    "game_date": "2026-11-15",
+    "boxscore_source_url": "https://stats.ncaa.org/synthetic-demo/game",
+    "teams": [
+      {"team_id": "SYNTHETIC-T1", "team_name": "Example Owls", "division": "I", "final_score": 18},
+      {"team_id": "SYNTHETIC-T2", "team_name": "Example Foxes", "division": "II", "final_score": 15}
+    ],
+    "players": [
+      {"team_id": "SYNTHETIC-T1", "player_id": "SYNTHETIC-P1", "player_name": "Alex Example", "jersey_number": "01", "minutes": "30:15", "stats": {"pts": 18, "fgm": 6, "fga": 12, "fg3m": 2, "fg3a": 5, "ftm": 4, "fta": 4, "oreb": 2, "dreb": 5, "reb": 7, "ast": 4, "stl": 1, "blk": 0, "tov": 2, "pf": 3}},
+      {"team_id": "SYNTHETIC-T1", "player_id": "SYNTHETIC-P2", "player_name": "Casey Reserve", "jersey_number": "20", "minutes": "DNP", "participation": "did_not_play", "stats": {}},
+      {"team_id": "SYNTHETIC-T2", "player_id": "SYNTHETIC-P3", "player_name": "Renée Example", "jersey_number": "03", "minutes": "28:45", "stats": {"pts": 15, "fgm": 5, "fga": 10, "fg3m": 2, "fg3a": 4, "ftm": 3, "fta": 4, "oreb": 1, "dreb": 5, "reb": 6, "ast": 5, "stl": 0, "blk": 1, "tov": 1, "pf": 2}}
+    ]
+  }],
+  "rosters": [
+    {"season": "2026-27", "sport": "MBB", "team_id": "SYNTHETIC-T1", "source_url": "https://stats.ncaa.org/synthetic-demo/roster-1", "players": [
+      {"player_id": "SYNTHETIC-P1", "player_name": "Alex Example", "jersey_number": "01", "position": "Guard", "height": "6-2", "class_year": "Jr.", "hometown": "Example City, ZZ"},
+      {"player_id": "SYNTHETIC-P2", "player_name": "Casey Reserve", "jersey_number": "20", "position": "Forward", "height": "2.01 m", "class_year": "So.", "hometown": "Sample Town, ZZ"}
+    ]},
+    {"season": "2026-27", "sport": "MBB", "team_id": "SYNTHETIC-T2", "source_url": "https://stats.ncaa.org/synthetic-demo/roster-2", "players": [
+      {"player_id": "SYNTHETIC-P3", "player_name": "Renée Example", "jersey_number": "03", "position": "F", "height": "198 cm", "class_year": "Sr", "hometown": "Fictional City"}
+    ]}
+  ],
+  "conferences": [
+    {"season": "2026-27", "sport": "MBB", "team_id": "SYNTHETIC-T1", "conference": "Fictional East", "source_url": "https://stats.ncaa.org/synthetic-demo/conference-1"},
+    {"season": "2026-27", "sport": "MBB", "team_id": "SYNTHETIC-T2", "conference": "Fictional West", "source_url": "https://stats.ncaa.org/synthetic-demo/conference-2"}
+  ]
+}

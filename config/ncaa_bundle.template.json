@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "season": "2026-27",
+  "ncaa_season_id": null,
+  "sport": "MBB",
+  "provenance": "authorized_source",
+  "permission_reference": null,
+  "verification_reference": null,
+  "extracted_at": null,
+  "games": [],
+  "rosters": [],
+  "conferences": []
+}

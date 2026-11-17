@@ -1,0 +1,104 @@
+{
+  "notice": "Real stats.ncaa.org pages saved by the operator on 2026-11-17. Sanitized copies remove scripts, styles, links, iframes and CSRF/authenticity tokens only; parsed values are identical to the originals.",
+  "sanitizer": "src/common/sanitize.py",
+  "files": [
+    {
+      "fixture": "ncaa_scoreboard_mbb_d1_2026-11-16.sanitized.html",
+      "source_url": "https://stats.ncaa.org/season_divisions/18983/livestream_scoreboards?game_date=11%2F16%2F2026&conference_id=0",
+      "original_file": "ncca.html (later re-saved as d1_scoreboard.html; same games)",
+      "original_sha256": "26d84b5eb507ca067c0c7c5c91e7ec52398ecaf296c8eaaa0395da8b6e1c565b",
+      "sanitized_sha256": "42bb97892b5e5cd97abe9ba45d1ec8629af316d28661221b635606c6ad68d697"
+    },
+    {
+      "fixture": "ncaa_individual_stats_6643366.sanitized.html",
+      "source_url": "https://stats.ncaa.org/contests/6643366/individual_stats",
+      "original_file": "d1_individual_stats.html",
+      "original_sha256": "aa09f05273e050be119fa4f958d24d18d54f6f41b5400aa52090a615ea3681fc",
+      "sanitized_sha256": "4b2569547fd15c13b2cb382db0d4ad6e6b5b5f957f5341a3d106f32963eec5d4"
+    },
+    {
+      "fixture": "ncaa_box_score_6643366.sanitized.html",
+      "source_url": "https://stats.ncaa.org/contests/6643366/box_score",
+      "original_file": "d1_box_score.html",
+      "original_sha256": "18666eb61e0392ec82e7b35a2eb8efd3b2dea7c2cb1192a46ff5da9bd0d855e7",
+      "sanitized_sha256": "c850686b8995b2d79aff34a7b434bd4e05753f19ce6d28e81ecfad71f359be3f"
+    },
+    {
+      "fixture": "ncaa_roster_627529.sanitized.html",
+      "source_url": "https://stats.ncaa.org/teams/627529/roster",
+      "original_file": "d1_gw_roster.html",
+      "original_sha256": "5c88eae36ca6c0e2a2f94f2d618da0098a30fdb3c8fb8dfe13861dcefc3e8421",
+      "sanitized_sha256": "77350dc0de011ff8b609a4dcc4cea0dc098f18128b01cafaeb60f70dc9982d69"
+    },
+    {
+      "fixture": "ncaa_roster_627884.sanitized.html",
+      "source_url": "https://stats.ncaa.org/teams/627884/roster",
+      "original_file": "d1_ferrum_roster.html",
+      "original_sha256": "37239a439e7ee99e51cdcbc41e4a0d84f52971cec7935f36058b440e0833524b",
+      "sanitized_sha256": "e2a2e9765f8e85ee81f1ca759e58d109ba3fce7d4bef20e805a50ded24b5af1b"
+    },
+    {
+      "fixture": "ncaa_scoreboard_mbb_d2_2026-11-15.sanitized.html",
+      "source_url": "https://stats.ncaa.org/season_divisions/18984/livestream_scoreboards?game_date=11%2F15%2F2026&conference_id=0",
+      "original_file": "d2_scoreboard.html",
+      "original_sha256": "8fd62678e8f129e5dadc993600e974553182d6c35ecf00ddd945dac5ee1e9b36",
+      "sanitized_sha256": "12be72846ca298f4380dbf4ab87d2915e7981d4de043e456e0f6fc6a2af4ddb7"
+    },
+    {
+      "fixture": "ncaa_individual_stats_6631754.sanitized.html",
+      "source_url": "https://stats.ncaa.org/contests/6631754/individual_stats",
+      "original_file": "d2_individual_stats.html",
+      "original_sha256": "362d9e8a11a7cff26fedad2164f4085e5c65e54bdd1f7a03285ca2b438398f5e",
+      "sanitized_sha256": "b3308b5bbab87a9a06eeb99a160d860852de65676eff7dc2ea4908485233f5c1"
+    },
+    {
+      "fixture": "ncaa_box_score_6631754.sanitized.html",
+      "source_url": "https://stats.ncaa.org/contests/6631754/box_score",
+      "original_file": "d2_box_score.html",
+      "original_sha256": "30a04fa7f547962b5c52a22e5d9242038a4239af27cae7ccee5d85c9044dd70d",
+      "sanitized_sha256": "2f22bf906a736cb83e76ab0a4bd1a51eb5aff085e36901be554dc7eabe148c1c"
+    },
+    {
+      "fixture": "ncaa_roster_627590.sanitized.html",
+      "source_url": "https://stats.ncaa.org/teams/627590/roster",
+      "original_file": "d2_fairmont_roster.html",
+      "original_sha256": "9acd811915f5131f7e12e23a61b13739ed04965ef8bd940db0dd246f1bc53f87",
+      "sanitized_sha256": "87801f8a97424b4d8b941dd0acadc5b1f2eb4d21605333771f0607faf908c85e"
+    },
+    {
+      "fixture": "ncaa_scoreboard_mbb_d3_2026-11-14.sanitized.html",
+      "source_url": "https://stats.ncaa.org/season_divisions/18985/livestream_scoreboards?game_date=11%2F14%2F2026&conference_id=0",
+      "original_file": "d3_scoreboard.html",
+      "original_sha256": "fc1e83b90fe7add729e0b4fb20372746d7fd6f2da9a11ef93b2b73085568e98c",
+      "sanitized_sha256": "7e3f0c5e3f1bc90c7a911b99cea5f738a52aaed9efbc0b546313b73f05ca91b5"
+    },
+    {
+      "fixture": "ncaa_individual_stats_6617400.sanitized.html",
+      "source_url": "https://stats.ncaa.org/contests/6617400/individual_stats",
+      "original_file": "d3_individual_stats.html",
+      "original_sha256": "7fe1e68f1f9fc3ca073d3bb38a382d742e275b0f937038d53d4a86cd455c86ea",
+      "sanitized_sha256": "12e53e1a8afe0efcb540e9228ab3a485ece066100bb5177e5feabdf6f60cba76"
+    },
+    {
+      "fixture": "ncaa_box_score_6617400.sanitized.html",
+      "source_url": "https://stats.ncaa.org/contests/6617400/box_score",
+      "original_file": "d3_box_score.html",
+      "original_sha256": "875648f976a92ad9d528638920687ec0fec0d20875405d13023a5a89f573d0a2",
+      "sanitized_sha256": "a392ace329d6ad1054c1d1dd9fa4fe04f38713a539e774d23e3166ed9ff13aed"
+    },
+    {
+      "fixture": "ncaa_roster_628171.sanitized.html",
+      "source_url": "https://stats.ncaa.org/teams/628171/roster",
+      "original_file": "d3_bowdoin_roster.html",
+      "original_sha256": "3a766f46239c34b12661e5fc06e0d05db3c776a61268abfb0aeb1dbc8267df92",
+      "sanitized_sha256": "0d0b8aabb7e405ba0b059b0dfc0b70aad92670ad794c4d4b862fa08ffc107df8"
+    },
+    {
+      "fixture": "ncaa_roster_628193.sanitized.html",
+      "source_url": "https://stats.ncaa.org/teams/628193/roster",
+      "original_file": "d3_uchicago_roster.html (replacement save; the first file under this name was the Schedule/Results page)",
+      "original_sha256": "6fc6f7777b173e973801533e007d4a414a01321e50d3fbbf5c1dd8d5e124b778",
+      "sanitized_sha256": "e9f41714ee5033565d05b26d0724e0cb06eab91b25ab88f47f83e86d4aab0d51"
+    }
+  ]
+}

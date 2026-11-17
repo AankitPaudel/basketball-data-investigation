@@ -1,0 +1,21 @@
+benv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+logs/*
+!logs/.gitkeep
+data/exports/*
+!data/exports/.gitkeep
+data/inputs/*
+!data/inputs/.gitkeep
+*.tmp
+
+# Operator-saved raw pages keep session tokens; commit only sanitized fixtures.
+ankit/

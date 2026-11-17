@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "notice": "Real games built from operator-saved stats.ncaa.org pages (stats.ncaa.org robots.txt disallows automated access). Each pair is [local file, URL it was saved from]. Files under ankit/ are git-ignored raw saves.",
+  "affiliations": "config/ncaa_team_affiliations.json",
+  "games": [
+    {
+      "game_id": "6643366",
+      "label": "D-I scoreboard: Ferrum (MBB D-II, reclassifying) at George Washington (D-I), 2026-11-16",
+      "output": "data/processed/ncaa-game-6643366",
+      "scoreboard": ["ankit/d1_scoreboard.html", "https://stats.ncaa.org/season_divisions/18983/livestream_scoreboards?game_date=11%2F16%2F2026&conference_id=0"],
+      "individual_stats": ["ankit/d1_individual_stats.html", "https://stats.ncaa.org/contests/6643366/individual_stats"],
+      "box_score": ["ankit/d1_box_score.html", "https://stats.ncaa.org/contests/6643366/box_score"],
+      "rosters": [
+        ["ankit/d1_gw_roster.html", "https://stats.ncaa.org/teams/627529/roster"],
+        ["ankit/d1_ferrum_roster.html", "https://stats.ncaa.org/teams/627884/roster"]
+      ]
+    },
+    {
+      "game_id": "6631754",
+      "label": "D-II scoreboard: Ferrum (MBB D-II, reclassifying) at Fairmont St. (D-II), 2026-11-15",
+      "output": "data/processed/ncaa-game-6631754",
+      "scoreboard": ["ankit/d2_scoreboard.html", "https://stats.ncaa.org/season_divisions/18984/livestream_scoreboards?game_date=11%2F15%2F2026&conference_id=0"],
+      "individual_stats": ["ankit/d2_individual_stats.html", "https://stats.ncaa.org/contests/6631754/individual_stats"],
+      "box_score": ["ankit/d2_box_score.html", "https://stats.ncaa.org/contests/6631754/box_score"],
+      "rosters": [
+        ["ankit/d2_fairmont_roster.html", "https://stats.ncaa.org/teams/627590/roster"],
+        ["ankit/d1_ferrum_roster.html", "https://stats.ncaa.org/teams/627884/roster"]
+      ]
+    },
+    {
+      "game_id": "6617400",
+      "label": "D-III scoreboard: Bowdoin (D-III) at UChicago (D-III), 2026-11-14",
+      "output": "data/processed/ncaa-game-6617400",
+      "scoreboard": ["ankit/d3_scoreboard.html", "https://stats.ncaa.org/season_divisions/18985/livestream_scoreboards?game_date=11%2F14%2F2026&conference_id=0"],
+      "individual_stats": ["ankit/d3_individual_stats.html", "https://stats.ncaa.org/contests/6617400/individual_stats"],
+      "box_score": ["ankit/d3_box_score.html", "https://stats.ncaa.org/contests/6617400/box_score"],
+      "rosters": [
+        ["ankit/d3_bowdoin_roster.html", "https://stats.ncaa.org/teams/628171/roster"],
+        ["ankit/d3_uchicago_roster.html", "https://stats.ncaa.org/teams/628193/roster"]
+      ]
+    }
+  ]
+}

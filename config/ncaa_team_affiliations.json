@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "notice": "Season-specific team affiliations. Each entry is backed by an NCAA Directory page plus an official conference or institutional page, retrieved and hashed on the date shown. Raw copies are kept locally in data/raw/affiliations/ (git-ignored). Division is never inferred from a scoreboard filter or a URL parameter. \"division\" is the sport-specific division from the NCAA Directory sport row (written to the CSV); institution_division/institution_status/reclass_division record the institution's membership separately.",
+  "affiliations": [
+    {
+      "season": "2026-27",
+      "sport": "MBB",
+      "team_id": "627529",
+      "team_name": "George Washington",
+      "ncaa_org_id": "249",
+      "ncaa_org_id_evidence": "stats.ncaa.org team 627529 pages link org_id=249 and logo 249.gif; directory org 249 lists Men's Basketball coach Chris Caputo, matching the team page coach",
+      "division": "I",
+      "conference": "Atlantic 10 Conference",
+      "institution_division": "I",
+      "institution_status": "Active",
+      "reclass_division": null,
+      "reclassifying": false,
+      "evidence": [
+        {
+          "kind": "ncaa_directory",
+          "url": "https://web3.ncaa.org/directory/orgDetail?id=249",
+          "retrieved_at": "2026-11-17T07:38:00Z",
+          "sha256": "57c88d8feb5b5d392f4ed0c199525d3de5ab337a42fc2f907d5ba17f040dc464",
+          "academic_year": "2026-2027",
+          "observed": {
+            "division": "I",
+            "conference": "Atlantic 10 Conference",
+            "institution_division": "I"
+          },
+          "quote": "Division: I (Active); Conference: Atlantic 10 Conference; Sponsored Sports for the 2026-2027 Academic Year: Men's Basketball | Chris Caputo | I | Atlantic 10 Conference"
+        },
+        {
+          "kind": "conference_official",
+          "url": "https://atlantic10.com/news/2026/9/29/atlantic-10-announces-2026-27-mens-basketball-conference-schedule.aspx",
+          "retrieved_at": "2026-11-17T07:40:00Z",
+          "sha256": "18962671e13534c615031177ae5f74f6d0b8aca83fb29d4582afc45d8653c36f",
+          "academic_year": "2026-27",
+          "observed": {
+            "conference": "Atlantic 10 Conference"
+          },
+          "quote": "Atlantic 10 Announces 2026-27 Men's Basketball Conference Schedule (9/29/2026): ... VCU at George Washington ... George Washington at George Mason"
+        }
+      ]
+    },
+    {
+      "season": "2026-27",
+      "sport": "MBB",
+      "team_id": "627884",
+      "team_name": "Ferrum",
+      "ncaa_org_id": "225",
+      "ncaa_org_id_evidence": "stats.ncaa.org team 627884 pages link org_id=225 and logo 225.gif; directory org 225 lists Men's Basketball coach James Johnson, matching the team page coach",
+      "division": "II",
+      "conference": "Conference Carolinas",
+      "institution_division": "III",
+      "institution_status": "Expedited Reclassifying Member",
+      "reclass_division": "II",
+      "reclass_year": 2,
+      "reclassifying": true,
+      "evidence": [
+        {
+          "kind": "ncaa_directory",
+          "url": "https://web3.ncaa.org/directory/orgDetail?id=225",
+          "retrieved_at": "2026-11-17T07:38:00Z",
+          "sha256": "9c4e1826a9068bd13d77211f46efe1d0371be6e514738e4b9d4b7931f7c38c74",
+          "academic_year": "2026-2027",
+          "observed": {
+            "division": "II",
+            "conference": "Conference Carolinas",
+            "institution_division": "III",
+            "reclass_division": "II"
+          },
+          "quote": "Division: III (Expedited Reclassifying Member); Reclass Division: II (Year 2); Conference: Conference Carolinas; Sponsored Sports for the 2026-2027 Academic Year: Men's Basketball | James Johnson | II | Conference Carolinas"
+        },
+        {
+          "kind": "institution_official",
+          "url": "https://ferrumpanthers.com/sports/mens-basketball/schedule/2026-27",
+          "retrieved_at": "2026-11-17T07:40:00Z",
+          "sha256": "f28ef944ea15796f95bd1914d7e6d66201d5d70b478dd069ea8029e7279eda78",
+          "academic_year": "2026-27",
+          "observed": {
+            "division": "II",
+            "conference": "Conference Carolinas"
+          },
+          "quote": "2026-27 Men's Basketball Schedule: league games carry alt=\"Conference Carolinas\"; footer \"NCAA Division 2\"; Nov 16 at George Washington University, L, 57-94"
+        }
+      ]
+    },
+    {
+      "season": "2026-27",
+      "sport": "MBB",
+      "team_id": "627590",
+      "team_name": "Fairmont St.",
+      "ncaa_org_id": "1076",
+      "ncaa_org_id_evidence": "stats.ncaa.org team 627590 roster links org_id=1076 and logo 1076.gif (also used for Fairmont St. on contest 6631754); directory org 1076 lists Men's Basketball coach Daniel Mondragon, matching the team page coach",
+      "division": "II",
+      "conference": "Mountain East Conference",
+      "institution_division": "II",
+      "institution_status": "Active",
+      "reclass_division": null,
+      "reclassifying": false,
+      "evidence": [
+        {
+          "kind": "ncaa_directory",
+          "url": "https://web3.ncaa.org/directory/orgDetail?id=1076",
+          "retrieved_at": "2026-11-17T08:39:09Z",
+          "sha256": "ef263bab57b975e325d3a220ff0ad0f0c145591124786416d8cd1c5612101759",
+          "academic_year": "2026-2027",
+          "observed": {
+            "division": "II",
+            "conference": "Mountain East Conference",
+            "institution_division": "II"
+          },
+          "quote": "Fairmont State University (FSU); Division: II (Active); Conference: Mountain East Conference; Sponsored Sports for the 2026-2027 Academic Year: Men's Basketball | Daniel Mondragon | II | Mountain East Conference"
+        },
+        {
+          "kind": "institution_official",
+          "url": "https://fightingfalcons.com/sports/mens-basketball/schedule/2026-27",
+          "retrieved_at": "2026-11-17T08:40:16Z",
+          "sha256": "0cec0bca19310acfff13c81525b21301a3093e496ca3e9be923ca091045138fc",
+          "academic_year": "2026-27",
+          "observed": {
+            "conference": "Mountain East Conference"
+          },
+          "quote": "2026-27 Men's Basketball Schedule - Fairmont State University Athletics: league games carry alt=\"Mountain East Conference\" (44 logos); Nov 15 (Sun) vs Ferrum College W, 94-74"
+        }
+      ]
+    },
+    {
+      "season": "2026-27",
+      "sport": "MBB",
+      "team_id": "628171",
+      "team_name": "Bowdoin",
+      "ncaa_org_id": "69",
+      "ncaa_org_id_evidence": "stats.ncaa.org team 628171 roster links org_id=69 and logo 69.gif (also used for Bowdoin on contest 6617400); directory org 69 lists Men's Basketball coach Alex Lloyd, matching the team page coach",
+      "division": "III",
+      "conference": "New England Small College Athletic Conference",
+      "conference_aliases": [
+        "NESCAC"
+      ],
+      "institution_division": "III",
+      "institution_status": "Active",
+      "reclass_division": null,
+      "reclassifying": false,
+      "evidence": [
+        {
+          "kind": "ncaa_directory",
+          "url": "https://web3.ncaa.org/directory/orgDetail?id=69",
+          "retrieved_at": "2026-11-17T08:39:10Z",
+          "sha256": "06946848d54e7910af043a21b7a9b5328a5a96d072f1642e6e2fcf957fcf1d2d",
+          "academic_year": "2026-2027",
+          "observed": {
+            "division": "III",
+            "conference": "New England Small College Athletic Conference",
+            "institution_division": "III"
+          },
+          "quote": "Bowdoin College (BOW); Division: III (Active); Conference: New England Small College Athletic Conference; Sponsored Sports for the 2026-2027 Academic Year: Men's Basketball | Alex Lloyd | III | New England Small College Athletic Conference"
+        },
+        {
+          "kind": "institution_official",
+          "url": "https://athletics.bowdoin.edu/sports/mens-basketball/schedule/2026-27",
+          "retrieved_at": "2026-11-17T08:40:20Z",
+          "sha256": "cb123e31559d7a8fd67ac8f3fd1e1f57a8bb3d26103cf3c4a452d87870650221",
+          "academic_year": "2026-27",
+          "observed": {
+            "division": "III",
+            "conference": "NESCAC"
+          },
+          "quote": "2026-27 Men's Basketball Schedule - Bowdoin College: conference games flagged \"NESCAC *\"; page text \"NCAA Division III\"; Nov 14 (Sat) at University of Chicago L, 63-87"
+        }
+      ]
+    },
+    {
+      "season": "2026-27",
+      "sport": "MBB",
+      "team_id": "628193",
+      "team_name": "UChicago",
+      "ncaa_org_id": "137",
+      "ncaa_org_id_evidence": "stats.ncaa.org team 628193 page links org_id=137; logo 137.gif used for UChicago on contest 6617400; directory org 137 lists Men's Basketball coach Mike McGrath, matching the team page coach",
+      "division": "III",
+      "conference": "University Athletic Association",
+      "conference_aliases": [
+        "UAA"
+      ],
+      "institution_division": "III",
+      "institution_status": "Active",
+      "reclass_division": null,
+      "reclassifying": false,
+      "evidence": [
+        {
+          "kind": "ncaa_directory",
+          "url": "https://web3.ncaa.org/directory/orgDetail?id=137",
+          "retrieved_at": "2026-11-17T08:39:11Z",
+          "sha256": "e77be9ca46d750cb12ac5a344859437972e4531c1004e96da301f06c2f72a936",
+          "academic_year": "2026-2027",
+          "observed": {
+            "division": "III",
+            "conference": "University Athletic Association",
+            "institution_division": "III"
+          },
+          "quote": "University of Chicago; Division: III (Active); Conference: University Athletic Association; Sponsored Sports for the 2026-2027 Academic Year: Men's Basketball | Mike McGrath | III | University Athletic Association"
+        },
+        {
+          "kind": "institution_official",
+          "url": "https://athletics.uchicago.edu/sports/mens-basketball/schedule/2026-27",
+          "retrieved_at": "2026-11-17T08:40:22Z",
+          "sha256": "776aad05f22f190eae7522bde30794b33e30c62231fbbd48e8df9811b9d845eb",
+          "academic_year": "2026-27",
+          "observed": {
+            "conference": "UAA"
+          },
+          "quote": "2026-27 Men's Basketball Schedule - University of Chicago: conference games flagged \"UAA *\"; Nov 14 (Sat) vs Bowdoin W, 87-63"
+        }
+      ]
+    }
+  ]
+}

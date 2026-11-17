@@ -1,0 +1,2937 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="CONTENT-TYPE"/>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+<meta content="eddf55e0b7cc67a1be7ce051e1035f7d89c69b6d" name="version"/>
+<meta content="NO-CACHE" http-equiv="CACHE-CONTROL"/>
+<meta content="NO-CACHE" http-equiv="PRAGMA"/>
+
+<title>NCAA Statistics</title>
+<!-- Bootstrap core CSS -->
+<!--
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+-->
+<!--
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.bootstrap4.css" crossorigin="anonymous">
+-->
+
+
+<!--
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+-->
+<!--
+<script src="https://cdn.datatables.net/2.0.0/js/dataTables.bootstrap4.js" crossorigin="anonymous"></script>
+-->
+
+
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body onload="if (top != self) { top.location=self.location; }" style="font-size: .75rem;">
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light header-dark-border-color py-0">
+<a aria-label="statistics" class="navbar-brand mr-0 mr-md-2" href="/">
+<img alt="NCAA" src="/assets/ncaa-fbc4d0406ae731b47babcc3fca53775b5955ef372bf8b8e998ca9a513e468b8f.svg" style="margin-left: 24px; margin-right: 0; margin-top: 6px;"/>
+<span class="dark-blue-font">Statistics</span>
+</a>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light header-dark-border-color py-0" style="background-color: var(--color-dark-blue) !important;">
+<button aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler bg-white" data-target="#navbarTogglerDemo01" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+<ul class="navbar-nav mr-auto mt-2 mt-lg-0 justify-content-center">
+<li class="nav-item dropdown">
+<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle skipMask" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink">
+          Rankings
+        </a>
+<div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
+<a class="dropdown-item" href="/rankings">National Rankings</a>
+<a class="dropdown-item" href="/active_career_leaders">Active Career Leaders</a>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link active" href="/contests/livestream_scoreboards">Scoreboard</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/selection_rankings/nitty_gritties">Selection Rankings</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/head_coaches">Head Coaches</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/search/players">Players</a>
+</li>
+</ul>
+<form accept-charset="UTF-8" action="/team/index" class="form-inline my-2 my-lg-0" id="change_team_form" method="post" onsubmit="mask('Loading');" style="display:inline;"><input name="utf8" type="hidden" value="✓"/>
+<div style="display:none;">
+<input data-disable-with="Submit" id="sport_btn" name="commit" type="submit" value="Submit"/>
+</div>
+<div class="ui-widget" id="team_autocomplete">
+<input class="form-control mr-sm-2" id="org_name" name="org_name" placeholder="Team Search" style="width:200px; font-size: 12px !important" type="search"/>
+<input id="org_id" name="org_id" type="hidden"/>
+</div>
+</form> </div>
+</nav>
+
+</header>
+<div id="stats_app_dialog" style="display:none;">
+</div>
+<div class="card p-1">
+<div class="card-body application contests/livestream_scoreboards p-0">
+<h3 class="card-title p-0"></h3>
+<div class="container-fluid p-0">
+<div class="row align-items-center justify-content-center p-0">
+<div class="col-sm-12 p-0">
+
+
+<h1>2026-27 Men's Basketball D-I Scoreboard</h1>
+<br/>
+<select class="chosen-select" id="game_sport_year_ctl_id_select" name="game_sport_year_ctl_id_select"><option selected="selected" value="17240">2026-27</option>
+<option value="16960">2025-26</option>
+<option value="16700">2024-25</option>
+<option value="16501">2023-24</option>
+<option value="16060">2022-23</option>
+<option value="15881">2021-22</option>
+<option value="15480">2020-21</option>
+<option value="15061">2019-20</option>
+<option value="14300">2018-19</option>
+<option value="12620">2017-18</option>
+<option value="12480">2016-17</option>
+<option value="12260">2015-16</option>
+<option value="12020">2014-15</option>
+<option value="11540">2013-14</option>
+<option value="11220">2012-13</option>
+<option value="10740">2011-12</option>
+<option value="10440">2010-11</option>
+<option value="10260">2009-10</option>
+<option value="10080">2008-09</option>
+<option value="3">2007-08</option>
+<option value="5">2006-07</option>
+<option value="7">2005-06</option>
+<option value="9">2004-05</option>
+<option value="10172">2003-04</option>
+<option value="10170">2002-03</option>
+<option value="10168">2001-02</option>
+<option value="10164">1999-00</option>
+<option value="10162">1998-99</option>
+<option value="10160">1997-98</option>
+<option value="13159">1996-97</option></select>
+
+<select class="chosen-select" id="sport_code_select" name="sport_code_select"><option value="">Select Sport</option><option value="MBA">Baseball</option>
+<option value="WFH">Field Hockey</option>
+<option value="MFB">Football</option>
+<option selected="selected" value="MBB">Men's Basketball</option>
+<option value="MIH">Men's Ice Hockey</option>
+<option value="MLA">Men's Lacrosse</option>
+<option value="MSO">Men's Soccer</option>
+<option value="MTE">Men's Tennis</option>
+<option value="MVB">Men's Volleyball</option>
+<option value="MWP">Men's Water Polo</option>
+<option value="WSB">Softball</option>
+<option value="WBB">Women's Basketball</option>
+<option value="WSV">Women's Beach Volleyball</option>
+<option value="WBW">Women's Bowling</option>
+<option value="WIH">Women's Ice Hockey</option>
+<option value="WLA">Women's Lacrosse</option>
+<option value="WSO">Women's Soccer</option>
+<option value="WTE">Women's Tennis</option>
+<option value="WVB">Women's Volleyball</option>
+<option value="WWP">Women's Water Polo</option></select>
+
+<select class="chosen-select" id="season_division_id_select" name="season_division_id_select"><option value="">Select Division</option><option selected="selected" value="18983">D-I</option>
+<option value="18984">D-II</option>
+<option value="18985">D-III</option></select>
+<select class="chosen-select" id="conference_id_select" name="conference_id_select"><option value="">Select Conference       </option><option value="821">ACC</option>
+<option value="920">ASUN</option>
+<option value="845">America East</option>
+<option value="823">American</option>
+<option value="820">Atlantic 10</option>
+<option value="25354">Big 12</option>
+<option value="30184">Big East</option>
+<option value="825">Big Sky</option>
+<option value="826">Big South</option>
+<option value="827">Big Ten</option>
+<option value="904">Big West</option>
+<option value="837">CAA</option>
+<option value="24312">CUSA</option>
+<option value="881">Horizon</option>
+<option value="865">Ivy League</option>
+<option value="875">MAC</option>
+<option value="876">MEAC</option>
+<option value="884">MVC</option>
+<option value="871">Metro</option>
+<option value="5486">Mountain West</option>
+<option value="846">NEC</option>
+<option value="902">OVC</option>
+<option value="905">Pac-12</option>
+<option value="838">Patriot</option>
+<option value="911">SEC</option>
+<option value="916">SWAC</option>
+<option value="912">SoCon</option>
+<option value="914">Southland</option>
+<option value="819">Summit League</option>
+<option value="818">Sun Belt</option>
+<option value="923">UAC </option>
+<option value="922">WCC</option></select>
+<input id="game_date" name="game_date" type="text" value="11/16/2026"/>
+
+<!--change season form-->
+<form accept-charset="UTF-8" action="/contests/livestream_scoreboards" method="get" onsubmit='mask("Loading");'><input name="utf8" type="hidden" value="✓"/>
+<input id="change_season_game_sport_year_ctl_id" name="game_sport_year_ctl_id" type="hidden"/>
+<input id="change_season_conference_id" name="conference_id" type="hidden" value="0"/>
+<input id="change_season_conference_id" name="conference_id" type="hidden" value="0"/>
+<input id="change_season_tournament_id" name="tournament_id" type="hidden"/>
+<input id="division" name="division" type="hidden" value="1"/>
+<div style="display:none">
+<input data-disable-with="Submit" id="change_season_submit" name="commit" type="submit" value="Submit"/>
+</div>
+</form>
+<!--change season division -->
+<form accept-charset="UTF-8" action="/contests/livestream_scoreboards" method="get" onsubmit='mask("Loading");'><input name="utf8" type="hidden" value="✓"/>
+<input id="change_season_division_id" name="season_division_id" type="hidden" value="18983"/>
+<input id="change_season_division_game_date" name="game_date" type="hidden" value="11/16/2026"/>
+<input id="change_season_division_conference_id" name="conference_id" type="hidden" value="0"/>
+<input id="change_season_division_tournament_id" name="tournament_id" type="hidden"/>
+<div style="display:none">
+<input data-disable-with="Submit" id="change_season_division_submit" name="commit" type="submit" value="Submit"/>
+</div>
+</form>
+<!--change thru games -->
+<form accept-charset="UTF-8" action="/season_divisions/18983/livestream_scoreboards" method="get" onsubmit='mask("Loading");'><input name="utf8" type="hidden" value="✓"/>
+<div style="display:none">
+<input id="change_game_date_season_division_id" name="season_division_id" type="hidden"/>
+<input id="change_game_date_game_date" name="game_date" type="hidden"/>
+<input id="change_game_date_conference_id" name="conference_id" type="hidden" value="0"/>
+<input id="change_game_date_tournament_id" name="tournament_id" type="hidden"/>
+<input data-disable-with="Submit" id="change_game_date_submit" name="commit" type="submit" value="Submit"/>
+</div>
+</form>
+<!--change sport-->
+<form accept-charset="UTF-8" action="/contests/livestream_scoreboards" method="get" onsubmit='mask("Loading");'><input name="utf8" type="hidden" value="✓"/>
+<input id="change_sport_sport_code" name="sport_code" type="hidden"/>
+<input id="academic_year" name="academic_year" type="hidden" value="2027"/>
+<input id="division" name="division" type="hidden" value="1"/>
+<input id="change_sport_game_date" name="game_date" type="hidden" value="11/16/2026"/>
+<div style="display:none">
+<input data-disable-with="Submit" id="change_sport_submit" name="commit" type="submit" value="Submit"/>
+</div>
+</form>
+<br/>
+<br/>
+<!--
+<table style="border-collapse: collapse;" class="livestream_table" width="600px">
+      <thead>
+  <tr>
+    <th>Game Date</th>
+    <th colspan="2">Teams</th>
+    <th colspan="2" align="center">Score</th>
+    <th></th>
+    <th>Neutral Site</th>
+    <th align="left">Attendance</th>
+  </tr>
+  </thead>
+  <tbody>
+    -->
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 11:00 AM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 1,032
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6661678">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 11:00 AM
+              </td>
+            -->
+<td valign="middle" width="30px">
+                 
+            </td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+                Miami-Hamilton
+            </td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6661678_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">30</td>
+<td align="right" class="border-left border-bottom" valign="middle">39</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">48</td>
+<td align="right" class="border-left" valign="middle">56</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8705093">
+                  69
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6661678 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6661678">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Morehead St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//444.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627419" target="TEAMS_WIN"> Morehead St. (3-2)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8705092">
+                  104
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6661678/box_score" target="box_score_6661678">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 12:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 1,737
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6643366">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 12:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Ferrum" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//225.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627884" target="TEAMS_WIN"> Ferrum (2-2)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6643366_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">26</td>
+<td align="right" class="border-left border-bottom" valign="middle">31</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">42</td>
+<td align="right" class="border-left" valign="middle">52</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8669335">
+                  57
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6643366 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6643366">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="George Washington" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//249.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627529" target="TEAMS_WIN"> George Washington (5-0)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8669336">
+                  94
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6643366/box_score" target="box_score_6643366">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 12:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 3,000
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6656341">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 12:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+                 
+            </td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+                Fisk
+            </td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6656341_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">30</td>
+<td align="right" class="border-left border-bottom" valign="middle">19</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">40</td>
+<td align="right" class="border-left" valign="middle">47</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8695160">
+                  49
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6656341 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6656341">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="North Ala." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//487.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627271" target="TEAMS_WIN"> North Ala. (3-2)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8695161">
+                  87
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6656341/box_score" target="box_score_6656341">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 02:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 3,573
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6657429">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 02:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Florida A&amp;M" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//228.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627521" target="TEAMS_WIN"> Florida A&amp;M (0-5)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6657429_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">29</td>
+<td align="right" class="border-left border-bottom" valign="middle">17</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">41</td>
+<td align="right" class="border-left" valign="middle">38</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8697334">
+                  46
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6657429 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6657429">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="UTEP" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//704.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627325" target="TEAMS_WIN"> UTEP (3-1)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8697335">
+                  79
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6657429/box_score" target="box_score_6657429">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 06:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 695
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6639787">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 06:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Iona" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//310.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627234" target="TEAMS_WIN"> Iona (2-4)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6639787_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">27</td>
+<td align="right" class="border-left border-bottom" valign="middle">40</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">30</td>
+<td align="right" class="border-left" valign="middle">45</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8662128">
+                  67
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6639787 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6639787">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="UMBC" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//391.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627379" target="TEAMS_WIN"> UMBC (3-3)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8662129">
+                  75
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6639787/box_score" target="box_score_6639787">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 06:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 8,933
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6635360">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 06:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Alcorn" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//17.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627277" target="TEAMS_WIN"> Alcorn (0-5)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6635360_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">30</td>
+<td align="right" class="border-left border-bottom" valign="middle">27</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">60</td>
+<td align="right" class="border-left" valign="middle">57</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8653396">
+                  57
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6635360 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6635360">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Maryland" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//392.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627380" target="TEAMS_WIN"> Maryland (2-2)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8653397">
+                  117
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6635360/box_score" target="box_score_6635360">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 06:30 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 8,305
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6660632">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 06:30 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Prairie View" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//553.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627555" target="TEAMS_WIN"> Prairie View (2-4)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6660632_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">29</td>
+<td align="right" class="border-left border-bottom" valign="middle">30</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">34</td>
+<td align="right" class="border-left" valign="middle">52</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8703360">
+                  59
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6660632 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6660632">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Ohio St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//518.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627540" target="TEAMS_WIN"> Ohio St. (3-2)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8703361">
+                  86
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6660632/box_score" target="box_score_6660632">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 07:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 5,358
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6639445">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 07:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="The Citadel" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//141.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627472" target="TEAMS_WIN"> The Citadel (3-2)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6639445_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">28</td>
+<td align="right" class="border-left border-bottom" valign="middle">23</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">38</td>
+<td align="right" class="border-left" valign="middle">49</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8661444">
+                  51
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6639445 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6639445">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Clemson" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//147.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627473" target="TEAMS_WIN"> Clemson (4-1)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8661445">
+                  87
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6639445/box_score" target="box_score_6639445">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 07:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 19,155
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6629285">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 07:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Grambling" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//261.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627424" target="TEAMS_WIN"> Grambling (1-2)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6629285_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">30</td>
+<td align="right" class="border-left border-bottom" valign="middle">29</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">36</td>
+<td align="right" class="border-left" valign="middle">52</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8642134">
+                  59
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6629285 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6629285">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Kentucky" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//334.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627242" target="TEAMS_WIN"> Kentucky (4-1)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8642135">
+                  88
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6629285/box_score" target="box_score_6629285">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 07:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 321
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6644914">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 07:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="St. Thomas (MN)" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//620.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627584" target="TEAMS_WIN"> St. Thomas (MN) (3-3)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6644914_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">30</td>
+<td align="right" class="border-left border-bottom" valign="middle">49</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">36</td>
+<td align="right" class="border-left" valign="middle">34</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8672405">
+                  79
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6644914 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6644914">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="LIU" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//361.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627248" target="TEAMS_WIN"> LIU (0-6)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8672404">
+                  70
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6644914/box_score" target="box_score_6644914">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 07:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 3,267
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6643076">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 07:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Western Ky." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//772.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627438" target="TEAMS_WIN"> Western Ky. (3-2)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6643076_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">40</td>
+<td align="right" class="border-left border-bottom" valign="middle">24</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">26</td>
+<td align="right" class="border-left" valign="middle">41</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8668756">
+                  64
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6643076 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6643076">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Tulsa" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//719.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627331" target="TEAMS_WIN"> Tulsa (4-0)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8668757">
+                  67
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6643076/box_score" target="box_score_6643076">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 07:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 5,746
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6651896">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 07:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Jacksonville" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//316.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627238" target="TEAMS_WIN"> Jacksonville (2-2)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6651896_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">31</td>
+<td align="right" class="border-left border-bottom" valign="middle">31</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">50</td>
+<td align="right" class="border-left" valign="middle">57</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8686295">
+                  62
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6651896 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6651896">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Georgia" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//257.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627396" target="TEAMS_WIN"> Georgia (5-0)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8686294">
+                  107
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6651896/box_score" target="box_score_6651896">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 07:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 1,271
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6653685">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 07:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Eastern Ky." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//202.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627515" target="TEAMS_WIN"> Eastern Ky. (4-1)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6653685_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">31</td>
+<td align="right" class="border-left border-bottom" valign="middle">34</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">25</td>
+<td align="right" class="border-left" valign="middle">24</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8689886">
+                  65
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6653685 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6653685">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Kent St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//331.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627241" target="TEAMS_WIN"> Kent St. (1-3)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8689887">
+                  49
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6653685/box_score" target="box_score_6653685">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 07:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 2,325
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6653858">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 07:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+                 
+            </td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+                Virginia-Lynchburg
+            </td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6653858_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">37</td>
+<td align="right" class="border-left border-bottom" valign="middle">34</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">60</td>
+<td align="right" class="border-left" valign="middle">57</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8690232">
+                  71
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6653858 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6653858">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="N.C. Central" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//489.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627504" target="TEAMS_WIN"> N.C. Central (1-4)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8690233">
+                  117
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6653858/box_score" target="box_score_6653858">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 07:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 5,604
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6641923">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 07:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Richmond" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//575.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627563" target="TEAMS_WIN"> Richmond (3-2)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6641923_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">23</td>
+<td align="right" class="border-left border-bottom" valign="middle">45</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">41</td>
+<td align="right" class="border-left" valign="middle">44</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8666400">
+                  68
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6641923 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6641923">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Virginia Tech" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//742.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627342" target="TEAMS_WIN"> Virginia Tech (5-0)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8666401">
+                  85
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6641923/box_score" target="box_score_6641923">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 07:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 1,013
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6644822">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 07:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+                 
+            </td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+                Fla. Memorial
+            </td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6644822_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">27</td>
+<td align="right" class="border-left border-bottom" valign="middle">29</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">40</td>
+<td align="right" class="border-left" valign="middle">51</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8672220">
+                  56
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6644822 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6644822">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Stetson" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//678.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627435" target="TEAMS_WIN"> Stetson (1-4)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8672221">
+                  91
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6644822/box_score" target="box_score_6644822">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 07:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 1,208
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6652060">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 07:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="DeSales" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//20.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/628157" target="TEAMS_WIN"> DeSales (2-1)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6652060_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">22</td>
+<td align="right" class="border-left border-bottom" valign="middle">31</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">37</td>
+<td align="right" class="border-left" valign="middle">38</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8686635">
+                  53
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6652060 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6652060">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Penn" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//540.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627550" target="TEAMS_WIN"> Penn (2-3)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8686634">
+                  75
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6652060/box_score" target="box_score_6652060">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 07:30 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 2,993
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6639375">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 07:30 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Tarleton St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//1395.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627583" target="TEAMS_WIN"> Tarleton St. (4-1)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6639375_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">35</td>
+<td align="right" class="border-left border-bottom" valign="middle">48</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">33</td>
+<td align="right" class="border-left" valign="middle">46</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8661304">
+                  83
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6639375 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6639375">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Drake" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//189.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627422" target="TEAMS_WIN"> Drake (3-1)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8661305">
+                  79
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6639375/box_score" target="box_score_6639375">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 07:30 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 1,023
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6660445">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 07:30 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+                 
+            </td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+                Midway
+            </td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6660445_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">18</td>
+<td align="right" class="border-left border-bottom" valign="middle">27</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">61</td>
+<td align="right" class="border-left" valign="middle">54</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8702987">
+                  45
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6660445 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6660445">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Southeast Mo. St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//654.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627229" target="TEAMS_WIN"> Southeast Mo. St. (3-2)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8702986">
+                  115
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6660445/box_score" target="box_score_6660445">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 08:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 2,319
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6655454">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 08:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Abilene Christian" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//2.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627272" target="TEAMS_WIN"> Abilene Christian (1-3)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6655454_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">24</td>
+<td align="right" class="border-left border-bottom" valign="middle">40</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">31</td>
+<td align="right" class="border-left" valign="middle">42</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8693387">
+                  64
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6655454 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6655454">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Missouri St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//669.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627306" target="TEAMS_WIN"> Missouri St. (4-0)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8693386">
+                  73
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6655454/box_score" target="box_score_6655454">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 08:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 1,743
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6641027">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 08:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+                 
+            </td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+                Calumet Col.
+            </td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6641027_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">20</td>
+<td align="right" class="border-left border-bottom" valign="middle">15</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">52</td>
+<td align="right" class="border-left" valign="middle">54</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8664608">
+                  35
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6641027 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6641027">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Valparaiso" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//735.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627337" target="TEAMS_WIN"> Valparaiso (3-1)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8664609">
+                  106
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6641027/box_score" target="box_score_6641027">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 08:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 3,874
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6638646">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 08:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Columbia" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//158.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627478" target="TEAMS_WIN"> Columbia (4-1)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6638646_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">28</td>
+<td align="right" class="border-left border-bottom" valign="middle">47</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">19</td>
+<td align="right" class="border-left" valign="middle">34</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8659847">
+                  75
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6638646 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6638646">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Northwestern" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//509.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627538" target="TEAMS_WIN"> Northwestern (3-2)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8659846">
+                  53
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6638646/box_score" target="box_score_6638646">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 08:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 4,323
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6638960">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 08:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Central Ark." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//1004.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627404" target="TEAMS_WIN"> Central Ark. (2-3)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6638960_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">35</td>
+<td align="right" class="border-left border-bottom" valign="middle">31</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">49</td>
+<td align="right" class="border-left" valign="middle">50</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8660474">
+                  66
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6638960 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6638960">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Oklahoma St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//521.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627542" target="TEAMS_WIN"> Oklahoma St. (3-1)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8660475">
+                  99
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6638960/box_score" target="box_score_6638960">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 08:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 1,920
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6634716">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 08:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+                 
+            </td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+                Mayville St.
+            </td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6634716_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">32</td>
+<td align="right" class="border-left border-bottom" valign="middle">35</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">48</td>
+<td align="right" class="border-left" valign="middle">59</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8652224">
+                  67
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6634716 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6634716">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="South Dakota St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//649.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627434" target="TEAMS_WIN"> South Dakota St. (5-0)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8652225">
+                  107
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6634716/box_score" target="box_score_6634716">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 08:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 6,046
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6643540">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 08:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Montana" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//441.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627448" target="TEAMS_WIN"> Montana (2-3)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6643540_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">22</td>
+<td align="right" class="border-left border-bottom" valign="middle">23</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">40</td>
+<td align="right" class="border-left" valign="middle">46</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8669683">
+                  45
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6643540 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6643540">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Kansas St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//327.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627239" target="TEAMS_WIN"> Kansas St. (3-1)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8669684">
+                  86
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6643540/box_score" target="box_score_6643540">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 08:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 6,831
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6644874">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 08:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Western Ill." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//771.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627350" target="TEAMS_WIN"> Western Ill. (1-4)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6644874_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">27</td>
+<td align="right" class="border-left border-bottom" valign="middle">36</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">54</td>
+<td align="right" class="border-left" valign="middle">45</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8672324">
+                  63
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6644874 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6644874">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Minnesota" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//428.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627390" target="TEAMS_WIN"> Minnesota (5-0)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8672325">
+                  99
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6644874/box_score" target="box_score_6644874">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 08:30 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 6,420
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6624298">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 08:30 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Southeastern La." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//655.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627230" target="TEAMS_WIN"> Southeastern La. (1-3)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6624298_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">40</td>
+<td align="right" class="border-left border-bottom" valign="middle">29</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">43</td>
+<td align="right" class="border-left" valign="middle">58</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8632812">
+                  69
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6624298 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6624298">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Texas A&amp;M" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//697.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627319" target="TEAMS_WIN"> Texas A&amp;M (5-0)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8632813">
+                  101
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6624298/box_score" target="box_score_6624298">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 08:30 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 1,270
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6646860">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 08:30 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+                 
+            </td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+                Dallas Christian
+            </td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6646860_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">36</td>
+<td align="right" class="border-left border-bottom" valign="middle">45</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">63</td>
+<td align="right" class="border-left" valign="middle">55</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8676176">
+                  81
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6646860 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6646860">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="ULM" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//498.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627508" target="TEAMS_WIN"> ULM (2-5)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8676177">
+                  118
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6646860/box_score" target="box_score_6646860">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 09:30 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 2,426
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6658343">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 09:30 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="East Texas A&amp;M" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//199.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627405" target="TEAMS_WIN"> East Texas A&amp;M (3-2)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6658343_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">40</td>
+<td align="right" class="border-left border-bottom" valign="middle">31</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">55</td>
+<td align="right" class="border-left" valign="middle">54</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8698907">
+                  71
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6658343 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6658343">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Oregon St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//528.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627546" target="TEAMS_WIN"> Oregon St. (5-0)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8698906">
+                  109
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6658343/box_score" target="box_score_6658343">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 10:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 3,729
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6641439">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 10:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Long Beach St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//99.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627416" target="TEAMS_WIN"> Long Beach St. (1-3)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6641439_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">20</td>
+<td align="right" class="border-left border-bottom" valign="middle">46</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">53</td>
+<td align="right" class="border-left" valign="middle">52</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8665433">
+                  66
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6641439 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6641439">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="UCLA" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//110.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627463" target="TEAMS_WIN"> UCLA (4-0)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8665432">
+                  105
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6641439/box_score" target="box_score_6641439">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 10:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 593
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6656331">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 10:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="UCCS" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//9754.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627672" target="TEAMS_WIN"> UCCS (1-2)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6656331_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">34</td>
+<td align="right" class="border-left border-bottom" valign="middle">29</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">50</td>
+<td align="right" class="border-left" valign="middle">51</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8695140">
+                  63
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6656331 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6656331">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Denver" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//183.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627488" target="TEAMS_WIN"> Denver (1-3)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8695141">
+                  101
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6656331/box_score" target="box_score_6656331">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 10:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 2,716
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6641839">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 10:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Portland St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//550.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627553" target="TEAMS_WIN"> Portland St. (2-3)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6641839_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">38</td>
+<td align="right" class="border-left border-bottom" valign="middle">40</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">44</td>
+<td align="right" class="border-left" valign="middle">50</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8666232">
+                  78
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6641839 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6641839">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="Saint Mary's (CA)" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//610.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627431" target="TEAMS_WIN"> Saint Mary's (CA) (4-1)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8666233">
+                  94
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6641839/box_score" target="box_score_6641839">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-auto p-0">
+<div class="card m-2" style="min-width: 330px;">
+<div class="card-body p-1">
+<div class="table-responsive">
+<table>
+<tr>
+<td colspan="10" style="min-width: 330px; max-width: 330px;" valign="middle">
+<div class="row p-0">
+<div class="col-6 p-0">
+                11/16/2026 10:00 PM 
+              </div>
+<div class="col p-0 text-right">
+                Attend: 1,632
+              </div>
+</div>
+</td>
+</tr>
+<tr id="contest_6654425">
+<!--
+              <td rowspan="2" valign="middle">
+              11/16/2026 10:00 PM
+              </td>
+            -->
+<td valign="middle" width="30px">
+<img alt="Texas Southern" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//699.gif"/>
+</td>
+<td class="opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627321" target="TEAMS_WIN"> Texas Southern (1-4)</a>
+</td>
+<td class="linescore_min_width d-none d-sm-table-cell" rowspan="2" valign="middle">
+<table cellpadding="4px" id="linescore_6654425_table">
+<tr>
+<td align="right" class="border-bottom" valign="middle">49</td>
+<td align="right" class="border-left border-bottom" valign="middle">43</td>
+</tr>
+<tr>
+<td align="right" class="" valign="middle">52</td>
+<td align="right" class="border-left" valign="middle">45</td>
+</tr>
+</table>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8691366">
+                  92
+                </div>
+</td>
+<!-- consider moving this up to the top
+        <td rowspan="2" valign="center" align="left" nowrap>
+          <div class="livestream_status_6654425 livestream_status livestream_game_over">
+                   Final
+          </div>
+        </td>
+        -->
+</tr>
+<tr id="contest_6654425">
+<!--
+-->
+<td valign="middle" width="30px">
+<img alt="UC San Diego" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//112.gif"/>
+</td>
+<td class="winner_background opponents_min_width" nowrap="" valign="middle">
+<a class="skipMask" href="/teams/627581" target="TEAMS_WIN"> UC San Diego (3-1)</a>
+</td>
+<td align="right" class="totalcol" style="width: 20px;">
+<div class="p-1" id="score_8691367">
+                  97
+                </div>
+</td>
+<!-- consider moving this up to the top
+        -->
+</tr>
+<tr>
+<td colspan="3"></td>
+<td align="left" colspan="5"><a class="skipMask" href="/contests/6654425/box_score" target="box_score_6654425">Box Score</a></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col">
+</div>
+<!--
+  </tbody>
+</table>
+-->
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer>©  NCAA <a href="https://www.ncaa.org/terms-of-service/" target="_blank" title="Terms and Conditions">Terms and Conditions</a> | <a href="https://www.ncaa.org/privacy-policy/" target="_blank" title="Our Privacy Policy">Privacy Policy</a> | <a href="mailto:ncaastats@ncaa.org">Contact Us</a> </footer>
+<!-- /.container -->
+</div></body>
+
+</html>

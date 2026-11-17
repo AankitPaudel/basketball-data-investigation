@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "notice": "Stage 3 local vs. cloud access probe (docs/stage3_access_test_plan.md). Explicit host allowlist; robots.txt is checked per host before any target request. The stats.ncaa.org targets are included to record the policy result in each environment; they are marked policy_only and are never requested, even if robots.txt were to allow them.",
+  "min_delay_seconds": 10,
+  "round_interval_seconds": 600,
+  "rounds": 3,
+  "hosts": [
+    "stats.ncaa.org",
+    "web3.ncaa.org",
+    "ferrumpanthers.com",
+    "fightingfalcons.com",
+    "athletics.bowdoin.edu",
+    "athletics.uchicago.edu",
+    "atlantic10.com"
+  ],
+  "urls": [
+    {"url": "https://stats.ncaa.org/season_divisions/18983/livestream_scoreboards?game_date=11%2F16%2F2026&conference_id=0", "purpose": "NCAA D-I scoreboard (expected: robots disallowed, not requested)", "policy_only": true},
+    {"url": "https://stats.ncaa.org/contests/6643366/individual_stats", "purpose": "NCAA individual stats (expected: robots disallowed, not requested)", "policy_only": true},
+    {"url": "https://web3.ncaa.org/directory/orgDetail?id=249", "purpose": "NCAA Directory: George Washington"},
+    {"url": "https://web3.ncaa.org/directory/orgDetail?id=225", "purpose": "NCAA Directory: Ferrum"},
+    {"url": "https://web3.ncaa.org/directory/orgDetail?id=1076", "purpose": "NCAA Directory: Fairmont State"},
+    {"url": "https://web3.ncaa.org/directory/orgDetail?id=69", "purpose": "NCAA Directory: Bowdoin"},
+    {"url": "https://web3.ncaa.org/directory/orgDetail?id=137", "purpose": "NCAA Directory: University of Chicago"},
+    {"url": "https://ferrumpanthers.com/sports/mens-basketball/schedule/2026-27", "purpose": "Ferrum official schedule"},
+    {"url": "https://fightingfalcons.com/sports/mens-basketball/schedule/2026-27", "purpose": "Fairmont State official schedule"},
+    {"url": "https://athletics.bowdoin.edu/sports/mens-basketball/schedule/2026-27", "purpose": "Bowdoin official schedule"},
+    {"url": "https://athletics.uchicago.edu/sports/mens-basketball/schedule/2026-27", "purpose": "UChicago official schedule"},
+    {"url": "https://atlantic10.com/news/2026/9/29/atlantic-10-announces-2026-27-mens-basketball-conference-schedule.aspx", "purpose": "Atlantic 10 official schedule release"}
+  ]
+}

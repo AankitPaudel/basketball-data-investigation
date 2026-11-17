@@ -1,0 +1,212 @@
+﻿# NCAA Basketball Data Investigation
+
+A small Python project for NCAA basketball access diagnostics, saved-page parsing,
+player/roster/conference enrichment, validation, and CSV/JSON exports.
+The configurable target season is **2026-27**, starting with men's basketball.
+
+**Current status:** three real 2026-27 men's games have been extracted at player level
+from operator-saved stats.ncaa.org pages, one from each division scoreboard (season ID
+17240). Player points equal both final scores in every game, and all 57 cross-page
+checks pass per game.
+
+| Contest | Scoreboard | Game | Player rows | Roster matches |
+|---|---|---|---|---|
+| 6643366 | D-I, 2026-11-16 | Ferrum 57 at George Washington 94 | 30 | 30/30 by ID |
+| 6631754 | D-II, 2026-11-15 | Ferrum 74 at Fairmont St. 94 | 23 | 23/23 by ID |
+| 6617400 | D-III, 2026-11-14 | Bowdoin 63 at UChicago 87 | 24 | 24/24 by ID |
+
+Every CSV is a **local validation preview**: no `permission_reference` has been
+supplied, so none is an authorized export. Division and conference come from
+`config/ncaa_team_affiliations.json`, which cites the NCAA Directory plus a conference
+or institutional page for each team. stats.ncaa.org's robots policy disallows
+automated access (verified again for the D-II/D-III scoreboards on 2026-11-17), so all
+NCAA pages are saved manually.
+
+## Setup and tests
+
+Python 3.10+ is required. From the repository root, use the existing environment:
+
+```powershell
+.\benv\Scripts\python.exe -m pip install -r requirements.txt
+.\benv\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+For a fresh environment, run `python -m venv .venv`, then use
+`.\.venv\Scripts\python.exe` in place of the interpreter above.
+`requirements-tested.txt` records the installed runtime versions used for testing;
+installation from that snapshot in a fresh environment has not been verified.
+
+## Enrich and export
+
+Run the offline synthetic example:
+
+```powershell
+.\benv\Scripts\python.exe -m src.main process-ncaa --manifest tests/fixtures/ncaa_enrichment_synthetic.json --season 2026-27 --output data/processed/example
+```
+
+The output directory contains a 39-column player-game CSV, JSON retaining raw input
+values and issue reasons, and `quality_report.json`. Height is in centimeters.
+Player IDs take priority within the same team, season, and sport. Unique name-only
+matches receive warnings; ambiguous matches retain the player row without candidate
+biodata. Missing values stay null. Validation checks shooting, rebounds, team points,
+missing enrichment, and duplicate identities. Repeated processing of the same input
+produces identical output without adding duplicate rows.
+
+For approved real data, fill [the input template](config/ncaa_bundle.template.json)
+using [the input contract](config/README.md), then run:
+
+```powershell
+.\benv\Scripts\python.exe -m src.main process-ncaa --manifest data/inputs/authorized-game.json --season 2026-27 --output data/exports
+```
+
+That real input is not included. `data/exports/` requires authorized-source provenance
+and a verification reference; synthetic/unreviewed bundles belong in `data/processed/`.
+A reference is an operator attestation, not automatic source verification. Set
+`--ncaa-season-id` only when the actual NCAA identifier has been verified.
+
+## Build a real game from saved pages
+
+```powershell
+.\benv\Scripts\python.exe -m src.main build-ncaa-game `
+  --scoreboard "ankit/d1_scoreboard.html" "https://stats.ncaa.org/season_divisions/18983/livestream_scoreboards?game_date=11%2F16%2F2026&conference_id=0" `
+  --individual-stats "ankit/d1_individual_stats.html" https://stats.ncaa.org/contests/6643366/individual_stats `
+  --box-score "ankit/d1_box_score.html" https://stats.ncaa.org/contests/6643366/box_score `
+  --roster "ankit/d1_gw_roster.html" https://stats.ncaa.org/teams/627529/roster `
+  --roster "ankit/d1_ferrum_roster.html" https://stats.ncaa.org/teams/627884/roster `
+  --affiliations config/ncaa_team_affiliations.json `
+  --output data/processed/ncaa-game-6643366
+```
+
+Files under `ankit/` are named by game (`d1_*`, `d2_*`, `d3_*`). This parses the real layouts and writes `manifest.json`, then runs the existing
+`process-ncaa` pipeline on it.
+- Individual stats: `src/ncaa/boxscore_parser.py:parse_individual_stats`.
+- Rosters: `src/ncaa/roster_parser.py:parse_ncaa_roster`.
+- Box-score Team Stats panel: `parse_team_stats`.
+
+The scoreboard must list the contest as Final. `TEAM` and team-totals rows are kept in
+the manifest but excluded from player rows. `quality_report.json` holds two kinds of check:
+- `source_checks`: player sums plus the TEAM row vs. totals for every statistic,
+  points vs. the header, totals and scoreboard, minutes vs. 200:00, and totals vs.
+  the Team Stats panel.
+- `team_score_checks`: the pipeline's own points check.
+
+Without `--permission-reference` the bundle is labeled `local_validation_preview`.
+The CSV is then named `..._LOCAL_PREVIEW.csv`, and the pipeline refuses `data/exports`.
+Supply `--permission-reference` (and `--verification-reference` after review) only
+when that attestation genuinely exists. Exit code 2 means rows carry warnings
+(currently missing division/conference) or a source check failed.
+
+To reproduce every saved game in one step, list each game's pages in
+`config/ncaa_games.json` and run:
+
+```powershell
+.\benv\Scripts\python.exe -m src.main build-ncaa-games --plan config/ncaa_games.json
+```
+
+Each game writes its own output directory (CSV, JSON, `manifest.json`,
+`quality_report.json`). A game whose pages are missing reports exit code 4 without
+stopping the others; `--only GAME_ID ...` selects games.
+
+`--affiliations` applies a season-specific division/conference mapping (also accepted
+by `process-ncaa`). An entry applies only when its season, sport, team ID and team name
+match. Each entry needs an NCAA Directory `orgDetail` page for that academic year, and
+every evidence item must agree with the entry. Conflicting entries, evidence, or bundle
+values stop processing. Division is never taken from a scoreboard filter or a ranking
+URL parameter. The CSV `division` column is the
+*sport-specific* division from the directory's sport row. The institution's own
+membership (`institution_division`, `institution_status`, `reclass_division`) is kept
+separately in the mapping and the quality report, because the two can differ. For
+example, Ferrum is a Division III "Expedited Reclassifying Member" (Reclass Division II,
+Year 2) whose men's basketball row is Division II. Reclassifying teams get a
+`division_reclassifying` warning. A non-reclassifying sport division that differs from
+the institution's needs an explicit `sport_division_note`. Raw evidence pages are kept in git-ignored `data/raw/affiliations/`, and their
+SHA-256 hashes are recorded in the mapping.
+
+Regression fixtures are sanitized copies made with `python -m src.main sanitize-html`.
+Scripts, styles and CSRF/authenticity tokens are removed, and parsed values are
+identical to the originals. Their original URLs and hashes are in
+`tests/fixtures/ncaa_real_sources.json`.
+
+## Discover games from a saved scoreboard
+
+```powershell
+.\benv\Scripts\python.exe -m src.main discover-ncaa-games --file ankit/ncca.html --source-url "https://stats.ncaa.org/season_divisions/18983/livestream_scoreboards?game_date=11%2F16%2F2026&conference_id=0" --output data/processed/ncaa-discovery
+```
+
+`src/ncaa/scoreboard_parser.py` reads the observed livestream-scoreboard layout: game
+date and local start time, contest ID, `/contests/{id}/box_score` URL, team names, team
+IDs from `/teams/{id}` links (null for opponents without an NCAA team page), records
+shown, final and period scores, and attendance. Each game is checked for period scores
+summing to the final score and a winner marker matching the higher score.
+Postponed/canceled games are excluded and listed separately. Other non-final games
+are kept with `completed: false`, and only completed games are passed on. In the
+saved page the "Final" status sits inside an HTML comment; this is recorded as
+`status_source: html_comment`, and an active status element takes precedence.
+
+Outputs: `scoreboard_games.json` (provenance: source URL, SHA-256 of the saved file,
+page season/division IDs, parse time), `scoreboard_games.csv`, and
+`ncaa_bundle.discovered.json`. The last one is a `process-ncaa` manifest skeleton with
+`player_statistics: pending_boxscore`. It cannot be processed until a
+`permission_reference` and box-score players are added. Scoreboard team divisions are
+left null because the listing filter is not each opponent's division. To compare a
+manifest's game IDs, dates, teams and scores with the scoreboard, add
+`--scoreboard FILE --scoreboard-url URL` to `process-ncaa`. Results go to
+`quality_report.json` under `scoreboard_cross_check`. Any non-match returns exit code 2.
+
+## Stage 3 access probe (local vs. cloud)
+
+See `docs/stage3_access_test_plan.md`. `python -m src.main probe --environment <label>`
+prints the planned requests without using the network. `--execute` sends them, but only
+to robots-permitted URLs on the allowlist in `config/access_probe_urls.json`, with the
+delay and stop rules described there. The cloud run is the manual
+`.github/workflows/access-probe.yml` workflow; it sends requests only when its input is
+`APPROVED`.
+
+## Diagnostics and saved HTML
+
+```powershell
+.\benv\Scripts\python.exe -m src.main diagnose ncaa https://stats.ncaa.org/contests/5731445/box_score --environment local-windows --log logs/local.jsonl
+.\benv\Scripts\python.exe -m src.main parse --help
+.\benv\Scripts\python.exe -m src.main collect --help
+.\benv\Scripts\python.exe -m src.main demo
+```
+
+The URL above is a historical diagnostic candidate, not a verified current-season game.
+`diagnose` records policy/access outcomes, status, timing, redirects, content type,
+response size, hashes, and environment labels. NCAA collection stops when robots
+rules disallow access. Credentials, cookies, and sensitive query parameters are not
+logged. The environment label alone does not prove a cloud test took place.
+
+`parse` processes local HTML; `collect` fetches a permitted page before parsing.
+Both use the provisional flat-table adapters. `demo` exercises those adapters offline
+with fictional NCAA box-score and roster fixtures. These commands produce the simpler
+parser schema; use `process-ncaa` for the enriched CSV contract. No source layout is
+guessed when tables cannot be parsed safely.
+
+Exit codes: **0** successful checks/output; **2** exported quality issues (also invalid
+CLI syntax); **3** access/policy/network blocker; **4** input or processing failure.
+Each output directory is replaced per run; use separate directories for separate bundles.
+
+## Repository layout
+
+```text
+src/
+  ncaa/        NCAA client, parsers, enrichment, and processing pipeline
+  common/      HTTP diagnostics, schemas, validation, and exports
+  main.py      Command-line entry point
+tests/         Automated tests, synthetic fixtures, and sanitized real NCAA pages
+config/        Input template and format documentation
+data/
+  source_inventory.csv   Discovered URLs and their verification/access status
+  inputs/      Private input bundles
+  raw/         Permitted source captures
+  processed/   Review and synthetic outputs
+  exports/     Reviewed real-source exports
+logs/          Local diagnostic evidence and future run logs
+```
+
+The existing NCAA access evidence is retained locally in
+`logs/ncaa-source-diagnostics.jsonl` and `logs/ncaa-policy-diagnostics.jsonl`.
+Source links and their discovery provenance are in [the inventory](data/source_inventory.csv).
+Generated data, private captures, logs, credentials, caches, and virtual environments
+are excluded from Git. No database, deployment, or paid service is required.

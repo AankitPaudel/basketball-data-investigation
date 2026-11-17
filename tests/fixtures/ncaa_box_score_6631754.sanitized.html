@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="CONTENT-TYPE"/>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+<meta content="eddf55e0b7cc67a1be7ce051e1035f7d89c69b6d" name="version"/>
+<meta content="NO-CACHE" http-equiv="CACHE-CONTROL"/>
+<meta content="NO-CACHE" http-equiv="PRAGMA"/>
+
+<title>NCAA Statistics</title>
+<!-- Bootstrap core CSS -->
+<!--
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+-->
+<!--
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.bootstrap4.css" crossorigin="anonymous">
+-->
+
+
+<!--
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+-->
+<!--
+<script src="https://cdn.datatables.net/2.0.0/js/dataTables.bootstrap4.js" crossorigin="anonymous"></script>
+-->
+
+
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body onload="if (top != self) { top.location=self.location; }" style="font-size: .75rem;">
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light header-dark-border-color py-0">
+<a aria-label="statistics" class="navbar-brand mr-0 mr-md-2" href="/">
+<img alt="NCAA" src="/assets/ncaa-fbc4d0406ae731b47babcc3fca53775b5955ef372bf8b8e998ca9a513e468b8f.svg" style="margin-left: 24px; margin-right: 0; margin-top: 6px;"/>
+<span class="dark-blue-font">Statistics</span>
+</a>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light header-dark-border-color py-0" style="background-color: var(--color-dark-blue) !important;">
+<button aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler bg-white" data-target="#navbarTogglerDemo01" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+<ul class="navbar-nav mr-auto mt-2 mt-lg-0 justify-content-center">
+<li class="nav-item dropdown">
+<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle skipMask" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink">
+          Rankings
+        </a>
+<div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
+<a class="dropdown-item" href="/rankings">National Rankings</a>
+<a class="dropdown-item" href="/active_career_leaders">Active Career Leaders</a>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/contests/livestream_scoreboards">Scoreboard</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/selection_rankings/nitty_gritties">Selection Rankings</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/head_coaches">Head Coaches</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/search/players">Players</a>
+</li>
+</ul>
+<form accept-charset="UTF-8" action="/team/index" class="form-inline my-2 my-lg-0" id="change_team_form" method="post" onsubmit="mask('Loading');" style="display:inline;"><input name="utf8" type="hidden" value="✓"/>
+<div style="display:none;">
+<input data-disable-with="Submit" id="sport_btn" name="commit" type="submit" value="Submit"/>
+</div>
+<div class="ui-widget" id="team_autocomplete">
+<input class="form-control mr-sm-2" id="org_name" name="org_name" placeholder="Team Search" style="width:200px; font-size: 12px !important" type="search"/>
+<input id="org_id" name="org_id" type="hidden"/>
+</div>
+</form> </div>
+</nav>
+
+</header>
+<div id="stats_app_dialog" style="display:none;">
+</div>
+<div class="card p-1">
+<div class="card-body application contests p-0">
+<h3 class="card-title p-0"></h3>
+<div class="container-fluid p-0">
+<div class="row align-items-center justify-content-center p-0">
+<div class="col-sm-12 p-0">
+<br/>
+<br/>
+
+<div class="table-responsive">
+<table align="center">
+<tr>
+<td>
+<a class="skipMask" href="/teams/627884" target="TEAMS_WIN"><img alt="Ferrum" class="large_logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//225.gif"/></a>
+</td>
+<td class="grey_text d-none d-sm-table-cell" nowrap="" valign="center">
+<span style="font-size:18px">
+<a class="skipMask" href="/teams/627884" target="TEAMS_WIN">Ferrum Panthers</a>
+</span><br/>
+       2-1, Conf 0-0
+   </td>
+<td class="" valign="center">
+</td>
+<td style="font-size:36px; color: grey" valign="center">
+     74
+   </td>
+<td class="d-none d-md-table-cell" style="padding: 0px 30px 0px 30px">
+<table style="border-collapse: collapse">
+<tr>
+<td class="grey_border_bottom"></td>
+<td align="right" class="grey_text grey_border_bottom" nowrap="" width="20px">1</td>
+<td align="right" class="grey_text grey_border_bottom" nowrap="" width="20px">2</td>
+<td align="right" class="grey_border_bottom" style="font-weight:bold" width="20px">S</td>
+</tr>
+<tr>
+<td>Ferrum</td>
+<td align="right" class="grey_text">40</td>
+<td align="right" class="grey_text">34</td>
+<td align="right" style="font-weight:bold">74</td>
+</tr>
+<tr>
+<td>Fairmont St.</td>
+<td align="right" class="grey_text">49</td>
+<td align="right" class="grey_text">45</td>
+<td align="right" style="font-weight:bold">94</td>
+</tr>
+<tr>
+<td class="grey_text" colspan="4">11/15/2026 04:00 PM</td>
+</tr>
+<tr>
+<td class="grey_text" colspan="4" nowrap="">Joe Retton Arena (Fairmont, WV)</td>
+</tr>
+<tr>
+<td class="grey_text" colspan="4" nowrap="">Attendance: 536</td>
+</tr>
+</table>
+</td>
+<td>
+<a class="skipMask" href="/teams/627590" target="TEAMS_WIN"><img alt="Fairmont St." class="large_logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//1076.gif"/></a>
+</td>
+<td class="grey_text d-none d-sm-table-cell" nowrap="" valign="center">
+<span style="font-size:18px">
+<a class="skipMask" href="/teams/627590" target="TEAMS_WIN">Fairmont St. Falcons</a>
+</span><br/>
+       2-0, Conf 0-0
+   </td>
+<td class="winner" valign="center">
+</td>
+<td style="font-size:36px; color: black" valign="center">
+     94
+   </td>
+</tr>
+<tr>
+<td class="grey_border_bottom grey_border_top" colspan="10">
+<table cellpadding="10px">
+<tr>
+<td style="font-size: 16px;">Box Score</td>
+<td style="font-size: 16px;"><a href="/contests/6631754/team_stats">Team Stats</a></td>
+<td style="font-size: 16px;"><a href="/contests/6631754/individual_stats">Individual Stats</a></td>
+<td style="font-size: 16px;"><a href="/contests/6631754/play_by_play">Play By Play</a></td>
+<td style="font-size: 16px;"><a href="/contests/6631754/officials">Officials</a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<div class="row justify-content-md-center">
+<div class="col-3 p-1" style="max-width:300px;">
+<table class="dataTable roundedCorners" id="team_stats_table" width="100px">
+<thead>
+<tr>
+<th class="box_score_summary_th" colspan="9">Team Stats</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>
+<table class="display dataTable">
+<thead>
+<tr>
+<th colspan="9">Field Goal %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap=""><div class="row"><img alt="Ferrum" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//225.gif"/><span class="d-none d-sm-block">Ferrum</span></div></td>
+<td class="d-none d-md-table-cell" width="80%">
+<div class="stat_bar_container" style="min-width:50px;">
+<div class="stat_bar" style="width: 40.943021827459134%; background-color: grey;"></div>
+</div>
+</td>
+<td width="5%">43.33</td>
+</tr>
+<tr>
+<td nowrap=""><div class="row"><img alt="Fairmont St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//1076.gif"/><span class="d-none d-sm-block">Fairmont St.</span></div></td>
+<td class="d-none d-md-table-cell" width="80%">
+<div class="stat_bar_container" style="min-width:50px;">
+<div class="stat_bar" style="width: 59.056978172540866%; background-color: blue;"></div>
+</div>
+</td>
+<td width="5%">62.50</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="display dataTable">
+<thead>
+<tr>
+<th colspan="9">3 PT Field Goal %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap=""><div class="row"><img alt="Ferrum" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//225.gif"/><span class="d-none d-sm-block">Ferrum</span></div></td>
+<td class="d-none d-md-table-cell" width="80%">
+<div class="stat_bar_container" style="min-width:50px;">
+<div class="stat_bar" style="width: 41.722296395193595%; background-color: grey;"></div>
+</div>
+</td>
+<td width="5%">43.75</td>
+</tr>
+<tr>
+<td nowrap=""><div class="row"><img alt="Fairmont St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//1076.gif"/><span class="d-none d-sm-block">Fairmont St.</span></div></td>
+<td class="d-none d-md-table-cell" width="80%">
+<div class="stat_bar_container" style="min-width:50px;">
+<div class="stat_bar" style="width: 58.277703604806405%; background-color: blue;"></div>
+</div>
+</td>
+<td width="5%">61.11</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="display dataTable">
+<thead>
+<tr>
+<th colspan="9">FT %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap=""><div class="row"><img alt="Ferrum" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//225.gif"/><span class="d-none d-sm-block">Ferrum</span></div></td>
+<td class="d-none d-md-table-cell" width="80%">
+<div class="stat_bar_container" style="min-width:50px;">
+<div class="stat_bar" style="width: 58.065265358262685%; background-color: grey;"></div>
+</div>
+</td>
+<td width="5%">100.00</td>
+</tr>
+<tr>
+<td nowrap=""><div class="row"><img alt="Fairmont St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//1076.gif"/><span class="d-none d-sm-block">Fairmont St.</span></div></td>
+<td class="d-none d-md-table-cell" width="80%">
+<div class="stat_bar_container" style="min-width:50px;">
+<div class="stat_bar" style="width: 41.934734641737315%; background-color: blue;"></div>
+</div>
+</td>
+<td width="5%">72.22</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="display dataTable">
+<thead>
+<tr>
+<th colspan="9">Assists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap=""><div class="row"><img alt="Ferrum" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//225.gif"/><span class="d-none d-sm-block">Ferrum</span></div></td>
+<td class="d-none d-md-table-cell" width="80%">
+<div class="stat_bar_container" style="min-width:50px;">
+<div class="stat_bar" style="width: 33.33333333333333%; background-color: grey;"></div>
+</div>
+</td>
+<td width="5%">9</td>
+</tr>
+<tr>
+<td nowrap=""><div class="row"><img alt="Fairmont St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//1076.gif"/><span class="d-none d-sm-block">Fairmont St.</span></div></td>
+<td class="d-none d-md-table-cell" width="80%">
+<div class="stat_bar_container" style="min-width:50px;">
+<div class="stat_bar" style="width: 66.66666666666666%; background-color: blue;"></div>
+</div>
+</td>
+<td width="5%">18</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="display dataTable">
+<thead>
+<tr>
+<th colspan="9">Rebounds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap=""><div class="row"><img alt="Ferrum" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//225.gif"/><span class="d-none d-sm-block">Ferrum</span></div></td>
+<td class="d-none d-md-table-cell" width="80%">
+<div class="stat_bar_container" style="min-width:50px;">
+<div class="stat_bar" style="width: 39.285714285714285%; background-color: grey;"></div>
+</div>
+</td>
+<td width="5%">22</td>
+</tr>
+<tr>
+<td nowrap=""><div class="row"><img alt="Fairmont St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//1076.gif"/><span class="d-none d-sm-block">Fairmont St.</span></div></td>
+<td class="d-none d-md-table-cell" width="80%">
+<div class="stat_bar_container" style="min-width:50px;">
+<div class="stat_bar" style="width: 60.71428571428571%; background-color: blue;"></div>
+</div>
+</td>
+<td width="5%">34</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="display dataTable">
+<thead>
+<tr>
+<th colspan="9">Turnovers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap=""><div class="row"><img alt="Ferrum" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//225.gif"/><span class="d-none d-sm-block">Ferrum</span></div></td>
+<td class="d-none d-md-table-cell" width="80%">
+<div class="stat_bar_container" style="min-width:50px;">
+<div class="stat_bar" style="width: 43.47826086956522%; background-color: grey;"></div>
+</div>
+</td>
+<td width="5%">10</td>
+</tr>
+<tr>
+<td nowrap=""><div class="row"><img alt="Fairmont St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//1076.gif"/><span class="d-none d-sm-block">Fairmont St.</span></div></td>
+<td class="d-none d-md-table-cell" width="80%">
+<div class="stat_bar_container" style="min-width:50px;">
+<div class="stat_bar" style="width: 56.52173913043478%; background-color: blue;"></div>
+</div>
+</td>
+<td width="5%">13</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr><td colspan="10" style="border-top: 0px solid white"></td></tr>
+</tfoot>
+</table>
+</div>
+<div class="col p-1" style="max-width: 500px;">
+<div class="row">
+<table class="display dataTable roundedCorners" id="game_leaders_table" width="200px">
+<thead>
+<tr>
+<th class="box_score_summary_th" colspan="9">Game Leaders</th>
+</tr>
+<tr>
+<th></th>
+<th align="left" nowrap="" width="10%"><div class="row"><img alt="Ferrum" class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//225.gif"/><span class="d-none d-sm-block">Ferrum</span></div></th>
+<th align="left" nowrap="" width="10%"><div class="row"><img alt="Fairmont St." class="logo_image" src="https://web2.ncaa.org/ncaa_style/img/All_Logos/sm//1076.gif"/><span class="d-none d-sm-block">Fairmont St.</span></div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap="">Points</td>
+<td nowrap="" valign="top">
+<a class="skipMask" href="/players/12338066" target="players_show">Wisdom Mintz</a>
+<br/>
+<span class="grey_text">
+                20 PTS, 5/11 FG, 3/4 3FG, 7/7 FT
+              </span>
+</td>
+<td nowrap="" valign="top">
+<a class="skipMask" href="/players/11472408" target="players_show">Caleb Thomas</a>
+<br/>
+<span class="grey_text">
+                19 PTS, 8/8 FG, 0/0 3FG, 3/3 FT
+              </span>
+<br/>
+<a class="skipMask" href="/players/11950672" target="players_show">Jared Frey</a>
+<br/>
+<span class="grey_text">
+                19 PTS, 7/9 FG, 4/5 3FG, 1/2 FT
+              </span>
+</td>
+</tr>
+<tr>
+<td nowrap="">Rebounds</td>
+<td nowrap="" valign="top">
+<a class="skipMask" href="/players/12338078" target="players_show">Ramez Zayed</a>
+<br/>
+<span class="grey_text">
+                5 REB, 2 OREB, 3 DREB
+              </span>
+</td>
+<td nowrap="" valign="top">
+<a class="skipMask" href="/players/11472408" target="players_show">Caleb Thomas</a>
+<br/>
+<span class="grey_text">
+                7 REB, 2 OREB, 5 DREB
+              </span>
+</td>
+</tr>
+<tr>
+<td nowrap="">Assists</td>
+<td nowrap="" valign="top">
+<a class="skipMask" href="/players/12338066" target="players_show">Wisdom Mintz</a>
+<br/>
+<span class="grey_text">
+                4 AST, 0 TO
+              </span>
+</td>
+<td nowrap="" valign="top">
+<a class="skipMask" href="/players/11481668" target="players_show">Zycheus Dobbs</a>
+<br/>
+<span class="grey_text">
+                6 AST, 3 TO
+              </span>
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr><td colspan="10" style="border-top: 0px solid white"></td></tr>
+</tfoot>
+</table>
+</div>
+<div class="row justify-content-center p-3">
+<div class="game_flow_chart_div" id="chart_container"></div>
+
+</div>
+</div>
+</div>
+<div class="row justify-content-center p-4">
+
+<div class="col">
+<div>
+<div style="position:relative; width:1000px; height:600px;">
+<svg height="100%" id="court" preserveaspectratio="xMinYMin meet" style="position:absolute;" viewbox="0 0  940 500" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:drawsvg="http://www.drawsvg.org" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs id="drawsvgConstraints"></defs>
+<rect height="500px" id="svgEditorBackground" style="fill: none; stroke: none;" width="940px" x="0" y="0"></rect>
+<rect height="500.000000" style="fill:#F5DEB3;stroke:black;stroke-width:1px;" width="940.000000" x="-0.000238" y="-0.000488"></rect>
+<path d="M470,0v500" id="halfcourt" style="fill:none;stroke:black;stroke-width:1px;"></path>
+<rect height="120.000000" id="right_freethow_lane" style="stroke: black; stroke-width: 1px;fill:none;" width="190" x="750" y="190.145752"></rect>
+<rect height="120.000000" id="left_freethow_lane" style="stroke: black; stroke-width: 1px;fill:none;" width="190" x="0" y="190.145752"></rect>
+<circle cx="469.352783" cy="250.190643" id="halfcourt_circle" r="60.000000" style="stroke: black; stroke-width: 1px;fill:none;"></circle>
+<path d="M182.14,354.26a0,0,0,0,1,0,0" id="e22_circleArc" style="fill:none;stroke:black;stroke-width:1px;"></path>
+<path d="M190,190.145737a60,60,0,0,1,0,120" id="left_free_throw_arc" style="fill:none;stroke:black;stroke-width:1px;"></path>
+<path d="M694.003418,474.357239a60,60,0,0,1,0,120" id="right_free_throw_arc" style="fill:none;stroke:black;stroke-width:1px;" transform="matrix(-1 2.77556e-16 -2.77556e-16 -1 1443.03 784.502)"></path>
+<path d="M40,220v60" id="left_backboard" style="fill:none;stroke:black;stroke-width:1px;"></path>
+<circle cx="50" cy="250" id="goal_left" r="9" style="stroke: black; stroke-width: 1px;fill:none;"></circle>
+<path d="M0,456.34h50.612938" id="3pt_line_bottom_left" style="fill:none;stroke:black;stroke-width:1px;"></path>
+<path d="M0,41.034019h51.991776" id="3pt_line_top_left" style="fill:none;stroke:black;stroke-width:1px;"></path>
+<path d="M900,220v60" id="right_backboard" style="fill:none;stroke:black;stroke-width:1px;"></path>
+<circle cx="890" cy="250" id="goal_right" r="9.000000" style="stroke: black; stroke-width: 1px;fill:none;"></circle>
+<path d="M940,41.034019h-50.612938" id="3pt_line_top_right" style="fill:none;stroke:black;stroke-width:1px;"></path>
+<path d="M940.000305,456.340027h-50.612938" id="3pt_line_bottom_right" style="fill:none;stroke:black;stroke-width:1px;"></path>
+<path d="M49.04,456.34a207.66,207.66,0,1,0,1,-415.31" id="left_3pt_arc" style="fill:none;stroke:black;stroke-width:1px;"></path>
+<path d="M264.201965,386.288757a207.660004,207.660004,0,1,0,1-415.309998" id="right_3pt_arc" style="fill:none;stroke:black;stroke-width:1px;" transform="matrix(-1 2.77556e-16 -2.77556e-16 -1 1154.23 427.326)"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="col">
+<div class="row">
+<svg height="80" width="300">
+<circle cx="10" cy="10" fill="white" r="5" stroke="grey" stroke-width="3"></circle>
+<text x="20" y="15">Ferrum Miss</text>
+<circle cx="10" cy="30" fill="grey" r="5" stroke="grey" stroke-width="3"></circle>
+<text x="20" y="35">Ferrum Make</text>
+<circle cx="10" cy="50" fill="white" r="5" stroke="blue" stroke-width="3"></circle>
+<text x="20" y="55">Fairmont St. Miss</text>
+<circle cx="10" cy="70" fill="blue" r="5" stroke="blue" stroke-width="3"></circle>
+<text x="20" y="75">Fairmont St. Make</text>
+</svg>
+</div>
+<div class="row">
+<select class="chosen-select" id="success_select" name="success_select" onchange="showShots();"><option value="">Shot</option><option label=" " value=""></option><option value="made">Make</option>
+<option value="missed">Miss</option></select>
+</div>
+<div class="row">
+<select class="chosen-select" id="period_select" name="period_select" onchange="showShots();"><option value="">Period</option><option label=" " value=""></option><option value="1">1</option>
+<option value="2">2</option></select>
+</div>
+<div class="row">
+<select class="chosen-select" id="team_select" name="team_select" onchange="showShots();"><option value="">Team</option><option label=" " value=""></option><option value="225">Ferrum</option>
+<option value="1076">Fairmont St.</option></select>
+</div>
+<div class="row">
+<select class="chosen-select" id="player_select" name="player_select" onchange="showShots();"><option value="">Player</option><option label=" " value=""></option><optgroup label="Fairmont St."><option value="797900613">Anfernee Hanna</option>
+<option value="797900603">Brady Hardewig</option>
+<option value="797900612">Caleb Thomas</option>
+<option value="797900600">Jared Frey</option>
+<option value="797900609">Zycheus Dobbs</option>
+<option value="797900618">Akwasi Opoku-Achampong</option>
+<option value="797900604">Anthony Spatafore</option>
+<option value="797900616">Dominykas Butka</option>
+<option value="797900611">Dylan Diaz</option>
+<option value="797900608">Jackson Roberts</option></optgroup><optgroup label="Ferrum"><option value="797900641">Alejandro Ford</option>
+<option value="797900649">Jackson Sellars</option>
+<option value="797900635">Nathan Fife</option>
+<option value="797900633">Tailon Manson</option>
+<option value="797900647">Wisdom Mintz</option>
+<option value="797900640">Amaris Hunt</option>
+<option value="797900643">Dezmon Ainsworth</option>
+<option value="797900629">Gavin Burns</option>
+<option value="797900650">Jordan Durham</option>
+<option value="797900651">Lenair Young</option>
+<option value="797900644">Mitch Burns</option>
+<option value="797900645">Myles McDuffie</option>
+<option value="797900630">Ramez Zayed</option></optgroup></select>
+</div>
+<div class="row">
+<span border="black" id="play_explanation"> </span>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer>©  NCAA <a href="https://www.ncaa.org/terms-of-service/" target="_blank" title="Terms and Conditions">Terms and Conditions</a> | <a href="https://www.ncaa.org/privacy-policy/" target="_blank" title="Our Privacy Policy">Privacy Policy</a> | <a href="mailto:ncaastats@ncaa.org">Contact Us</a> </footer>
+<!-- /.container -->
+</body>
+
+</html>
