@@ -2,6 +2,7 @@
 content hashes with the validated outputs, and merge them into one CSV (offline)."""
 import contextlib
 import csv
+import hashlib
 import io
 import json
 import tempfile
@@ -56,6 +57,10 @@ class FixtureRebuildTests(unittest.TestCase):
             self.assertTrue(game["rebuild_match"], game["game_id"])
             self.assertEqual(game["source_checks"]["passed"], 57)
             self.assertEqual(game["provenance"], "local_validation_preview")
+            # LF on every platform: the file bytes hash to the recorded content hash.
+            data = Path(game["csv"]).read_bytes()
+            self.assertNotIn(b"\r", data)
+            self.assertEqual(hashlib.sha256(data).hexdigest(), game["csv_sha256"])
         # Exit 2 comes only from the existing Ferrum division_reclassifying warnings.
         self.assertEqual(self.status, 2)
 
