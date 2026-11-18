@@ -46,6 +46,8 @@ plus a test of whether collection works the same locally and in the cloud.
   official page for each team.
 - **Ferrum quirk:** the institution is Division III, reclassifying to II, while its
   basketball team is listed as II. Both values are kept, and the rows get a warning.
+- **On real data:** contest 6643366 is on the D-I scoreboard, but its 30 rows split
+  into 14 Division I (George Washington) and 16 Division II (Ferrum, reclassifying).
 
 ## 5. Mistakes caught by the checks
 
@@ -75,9 +77,11 @@ plus a test of whether collection works the same locally and in the cloud.
 - **Same output across platforms:** rebuilding from the sanitized fixtures, with each
   original timestamp, gives the same CSV content hashes as the validated outputs. The
   rebuild-check workflow repeats this on a GitHub Ubuntu runner.
-- **Line-ending finding:** on Windows the CSV files are written with CRLF line endings,
-  so their on-disk hash differs from Linux. The comparison therefore uses the LF
-  content hash recorded in `quality_report.json`.
+- **Line-ending finding:** on Windows the CSV files were written with CRLF line endings,
+  so their on-disk hash differed from Linux. The writer now uses LF on every platform,
+  so rebuilt files match byte for byte. The three validated CSVs predate the fix and
+  are kept as they are (CRLF), so the comparison uses the LF content hash recorded in
+  `quality_report.json`, which is unchanged.
 - **Combined output:** `combine-ncaa-games` merges the per-game CSVs into one file
   with a column dictionary. It refuses any CSV whose content no longer matches its
   quality report.

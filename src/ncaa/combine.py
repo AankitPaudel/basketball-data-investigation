@@ -70,7 +70,7 @@ STEM = "ncaa_player_game_enriched_combined"
 
 
 def lf_sha256(path):
-    """SHA-256 of a file's text with CRLF normalized to LF (Windows writes CRLF, Linux LF)."""
+    """SHA-256 of a file's text with CRLF normalized to LF (outputs written before the LF fix are CRLF on Windows)."""
     return hashlib.sha256(Path(path).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
 
 

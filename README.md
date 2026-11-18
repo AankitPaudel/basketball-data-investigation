@@ -11,9 +11,14 @@ checks pass per game.
 
 | Contest | Scoreboard | Game | Player rows | Roster matches |
 |---|---|---|---|---|
-| 6643366 | D-I, 2026-11-16 | Ferrum 57 at George Washington 94 | 30 | 30/30 by ID |
-| 6631754 | D-II, 2026-11-15 | Ferrum 74 at Fairmont St. 94 | 23 | 23/23 by ID |
-| 6617400 | D-III, 2026-11-14 | Bowdoin 63 at UChicago 87 | 24 | 24/24 by ID |
+| 6643366 | D-I, 2026-11-16 | Ferrum 57 at George Washington 94 | 30: 14 Division I (George Washington) + 16 Division II (Ferrum, reclassifying) | 30/30 by ID |
+| 6631754 | D-II, 2026-11-15 | Ferrum 74 at Fairmont St. 94 | 23, all Division II | 23/23 by ID |
+| 6617400 | D-III, 2026-11-14 | Bowdoin 63 at UChicago 87 | 24, all Division III | 24/24 by ID |
+
+The scoreboard a game appears on is not the division of its rows. Contest 6643366 is on
+the D-I scoreboard, but only George Washington's 14 rows are Division I. Ferrum's 16
+rows are Division II, the sport division in the NCAA Directory, so the affiliation
+mapping assigns each team its own division.
 
 Every CSV is a **local validation preview**: no `permission_reference` has been
 supplied, so none is an authorized export. Division and conference come from
@@ -121,7 +126,9 @@ stopping the others; `--only GAME_ID ...` selects games.
 
 This merges every game's CSV from the plan into one 39-column file, in plan order, and
 writes `column_dictionary.csv` and `combine_report.json` (source hashes, rows by
-division, validation counts) next to it. The current three games give 77 rows. A
+division, validation counts) next to it. The current three games give 77 rows: 14
+Division I (George Washington), 39 Division II (16 Ferrum in contest 6643366, 23 in
+contest 6631754) and 24 Division III. A
 source CSV whose content no longer matches its `quality_report.json` hash is refused,
 as are duplicate player-game rows. The name keeps `_LOCAL_PREVIEW` unless every game is
 `authorized_source`, and `data/exports` is refused for previews. Column meanings:
@@ -140,9 +147,11 @@ hash with `expected_csv_sha256`, and a mismatch gives exit code 2 with
 .\benv\Scripts\python.exe -m src.main combine-ncaa-games --plan config/ncaa_games_fixtures.json --output data/processed/fixture-rebuild/combined --expect-sha256 402921c1ad1bf0a74590ca360a972dc36eaf0ddb630e4a44651b17e9ec6df03f
 ```
 
-Hashes are taken over the CSV text with LF line endings. On Windows the per-game CSV
-files are written with CRLF, so their on-disk SHA-256 differs from Linux; the
-`csv_sha256` in `quality_report.json` is the same on both. The manual
+All outputs are written with LF line endings on every platform, so a rebuilt CSV's
+on-disk SHA-256 equals the `csv_sha256` in its `quality_report.json`, locally and in the
+cloud. (The three validated CSVs were written before this change, with Windows CRLF
+line endings. They are left untouched, so their on-disk hashes, `363d7b4e…`,
+`d27f590b…` and `a7f1b23b…`, differ from their LF content hashes.) The manual
 `.github/workflows/rebuild-check.yml` workflow runs the same check on an Ubuntu
 runner, after a fresh install from `requirements-tested.txt`. It contacts no data
 source.

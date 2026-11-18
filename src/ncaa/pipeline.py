@@ -303,7 +303,7 @@ def process_bundle(bundle, base=Path(".")):
 
 def write_atomic(path, text):
     temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(text, encoding="utf-8")
+    temporary.write_text(text, encoding="utf-8", newline="")  # LF on every platform
     temporary.replace(path)
 
 
