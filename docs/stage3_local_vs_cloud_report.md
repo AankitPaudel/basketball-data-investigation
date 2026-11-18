@@ -6,12 +6,14 @@ the same probe configuration and code (`python -m src.main probe --execute`; pla
 
 ## Summary
 
-- **Every permitted page loaded in both environments.** 30 of 30 page requests returned
-  HTTP 200 locally and 30 of 30 in the cloud. Neither run had a timeout, connection
-  error, redirect, rate limit or CAPTCHA page on these sites.
+- **Every permitted page loaded in both environments.** These 30 pages were *not* NCAA
+  statistics pages: they were 5 NCAA Directory pages (`web3.ncaa.org`) and 5 school or
+  conference schedule pages, each requested in 3 rounds. 30 of 30 returned HTTP 200
+  locally and 30 of 30 in the cloud. Neither run had a timeout, connection error,
+  redirect, rate limit or CAPTCHA page on these sites.
 - **stats.ncaa.org behaved differently.**
   - *Local Windows:* robots.txt was readable (HTTP 200, plain text, 202 bytes) and
-    disallows automated access. The two stats pages were recorded as
+    disallows the two stats URLs for automated clients. They were recorded as
     `robots_disallowed`.
   - *GitHub Actions:* the request for robots.txt itself was refused with HTTP 403. The
     reply was a 382-byte HTML page that the probe identified as a challenge page. The
@@ -45,7 +47,7 @@ configuration content was identical.
 
 | Site and pages | Local outcome | Local status codes | Cloud outcome | Cloud status codes |
 |---|---|---|---|---|
-| stats.ncaa.org — `robots.txt` | readable; disallows automated access | 200 (text/plain, 202 B) | **refused, challenge page** | **403** (text/html, 382 B) |
+| stats.ncaa.org — `robots.txt` | readable; disallows the probe URLs | 200 (text/plain, 202 B) | **refused, challenge page** | **403** (text/html, 382 B) |
 | stats.ncaa.org — D-I scoreboard, contest 6643366 individual stats | `robots_disallowed`, not requested (×3 rounds) | – | `skipped_host_stopped`, not requested (×3 rounds) | – |
 | web3.ncaa.org — NCAA Directory, 5 `orgDetail` pages | accessible | 200 ×15 | accessible | 200 ×15 |
 | ferrumpanthers.com — Ferrum schedule | accessible | 200 ×3 | accessible | 200 ×3 |
@@ -88,7 +90,7 @@ stayed more consistent.
 
 ## Why stats.ncaa.org differed
 
-- **Locally,** NCAA served its robots.txt, and the file disallows automated access. That
+- **Locally,** NCAA served its robots.txt, and the file disallows the probe URLs. That
   is a published policy decision, and the probe followed it.
 - **From GitHub Actions,** NCAA's edge refused even the robots.txt request with HTTP 403
   and an HTML challenge page. The cloud request never reached the policy file, so the
@@ -104,9 +106,13 @@ stayed more consistent.
 
 What this means for the project:
 
-1. Automated collection from stats.ncaa.org is not permitted from either environment.
-   From the cloud runner, stats.ncaa.org also refuses the connection outright, so moving
-   the pipeline to GitHub Actions or a similar cloud host would not change that.
+1. robots.txt is a published request to automated clients, not a technical lock.
+   stats.ncaa.org's file (202 bytes, SHA-256 `bbc40843…`) disallowed both probe URLs
+   for this project's user agent, under the `User-agent: *` rule recorded in the test
+   plan. The project follows that request in both environments. (Only the file's hash
+   was kept, not its text.) From the cloud runner, stats.ncaa.org also
+   answered with HTTP 403, so moving the pipeline to GitHub Actions or a similar cloud
+   host would not change that.
 2. The NCAA pages used in Stages 1–2 were saved by a person in a browser, and that
    remains the only way they are obtained. The pipeline processes saved files offline.
 3. The NCAA Directory (`web3.ncaa.org`) and the school and conference sites, which

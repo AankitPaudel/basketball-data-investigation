@@ -12,6 +12,7 @@ from .ncaa.boxscore_parser import parse_boxscore as ncaa_boxscore
 from .ncaa.client import NCAAClient
 from .ncaa.roster_parser import parse_roster
 from .ncaa.affiliations import load_affiliations
+from .ncaa.combine import combine_games
 from .ncaa.discovery import write_discovery
 from .ncaa.pipeline import run_pipeline, write_atomic
 from .ncaa.real_game import build_bundle
@@ -58,7 +59,7 @@ def build_game(*, scoreboard, individual_stats, box_score=None, rosters=(), affi
         "player_match_counts": quality["player_match_counts"],
         "affiliations": [{key: entry.get(key) for key in ("team_name", "division", "institution_division", "conference")}
                          for entry in quality.get("affiliations", {}).get("applied", [])],
-        "issue_counts": quality["issue_counts"],
+        "issue_counts": quality["issue_counts"], "csv_sha256": quality["csv_sha256"],
         "team_score_checks": [{key: entry[key] for key in ("team_name", "source_score", "player_points_sum", "status")}
                               for entry in quality["team_score_checks"]],
         "source_checks": {"passed": len(quality["source_checks"]) - len(failed), "failed": failed},
@@ -81,6 +82,13 @@ def build_plan(plan_path, only=None):
                 box_score=game.get("box_score"), rosters=game.get("rosters", []),
                 affiliations=game.get("affiliations", plan.get("affiliations")), output=game["output"],
                 extracted_at=game.get("extracted_at"))
+            expected = game.get("expected_csv_sha256")
+            if expected:
+                # Rebuild check: compare the CSV content hash (LF line endings, platform-independent).
+                summary["expected_csv_sha256"] = expected
+                summary["rebuild_match"] = summary["csv_sha256"] == expected
+                if not summary["rebuild_match"]:
+                    code = max(code, 2)
             results.append({"label": game.get("label"), "status": code, **summary})
         except (ValueError, OSError, KeyError, TypeError) as exc:
             code = 4
@@ -139,6 +147,12 @@ def build_parser():
     plan = commands.add_parser("build-ncaa-games", help="Process every game listed in a plan file")
     plan.add_argument("--plan", type=Path, default=Path("config/ncaa_games.json"))
     plan.add_argument("--only", nargs="+", metavar="GAME_ID", help="Process only these game IDs")
+    combine = commands.add_parser("combine-ncaa-games",
+        help="Merge the per-game CSVs of a plan into one CSV with a column dictionary (offline)")
+    combine.add_argument("--plan", type=Path, default=Path("config/ncaa_games.json"))
+    combine.add_argument("--only", nargs="+", metavar="GAME_ID", help="Combine only these game IDs")
+    combine.add_argument("--output", type=Path, default=Path("data/processed/ncaa-combined"))
+    combine.add_argument("--expect-sha256", help="Exit 2 unless the combined CSV has this SHA-256 (rebuild check)")
     probe = commands.add_parser("probe", help="Robots-respecting access probe; dry run unless --execute")
     probe.add_argument("--config", type=Path, default=Path("config/access_probe_urls.json"))
     probe.add_argument("--environment", required=True, help="Label, e.g. local-windows or cloud-github-actions-ubuntu")
@@ -185,6 +199,15 @@ def main(argv=None):
             return status
         if args.command == "build-ncaa-games":
             return build_plan(args.plan, args.only)
+        if args.command == "combine-ncaa-games":
+            report = combine_games(args.plan, args.output, args.only)
+            summary = {key: report[key] for key in ("csv", "csv_sha256", "rows", "games", "provenance",
+                                                    "rows_by_division", "validation_counts")}
+            if args.expect_sha256:
+                summary.update(expected_sha256=args.expect_sha256,
+                               rebuild_match=report["csv_sha256"] == args.expect_sha256)
+            print(json.dumps(summary, indent=2))
+            return 2 if args.expect_sha256 and not summary["rebuild_match"] else 0
         if args.command == "discover-ncaa-games":
             discovery = read_scoreboard(args.file, args.source_url)
             paths = write_discovery(discovery, args.output)

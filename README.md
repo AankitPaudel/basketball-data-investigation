@@ -33,8 +33,14 @@ Python 3.10+ is required. From the repository root, use the existing environment
 
 For a fresh environment, run `python -m venv .venv`, then use
 `.\.venv\Scripts\python.exe` in place of the interpreter above.
-`requirements-tested.txt` records the installed runtime versions used for testing;
-installation from that snapshot in a fresh environment has not been verified.
+`requirements-tested.txt` records the installed runtime versions used for testing.
+A clean `git clone` of the committed repository passes the full test suite, using the
+existing interpreter. Installing from that snapshot into a new virtual environment has
+not been verified locally, because it needs PyPI access. The rebuild-check workflow
+does this on GitHub.
+
+How the project got here (what was tried, what failed, and why):
+[docs/process_writeup.md](docs/process_writeup.md).
 
 ## Enrich and export
 
@@ -106,6 +112,40 @@ To reproduce every saved game in one step, list each game's pages in
 Each game writes its own output directory (CSV, JSON, `manifest.json`,
 `quality_report.json`). A game whose pages are missing reports exit code 4 without
 stopping the others; `--only GAME_ID ...` selects games.
+
+### Combine games into one CSV
+
+```powershell
+.\benv\Scripts\python.exe -m src.main combine-ncaa-games --plan config/ncaa_games.json --output data/processed/ncaa-combined
+```
+
+This merges every game's CSV from the plan into one 39-column file, in plan order, and
+writes `column_dictionary.csv` and `combine_report.json` (source hashes, rows by
+division, validation counts) next to it. The current three games give 77 rows. A
+source CSV whose content no longer matches its `quality_report.json` hash is refused,
+as are duplicate player-game rows. The name keeps `_LOCAL_PREVIEW` unless every game is
+`authorized_source`, and `data/exports` is refused for previews. Column meanings:
+[docs/ncaa_column_dictionary.md](docs/ncaa_column_dictionary.md). Page types, URL
+patterns, IDs and quirks: [docs/ncaa_site_structure.md](docs/ncaa_site_structure.md).
+
+### Rebuild check (local and cloud)
+
+`config/ncaa_games_fixtures.json` rebuilds the three validated games from the committed
+sanitized fixtures, with each original `extracted_at`. It compares each CSV's content
+hash with `expected_csv_sha256`, and a mismatch gives exit code 2 with
+`rebuild_match: false`:
+
+```powershell
+.\benv\Scripts\python.exe -m src.main build-ncaa-games --plan config/ncaa_games_fixtures.json
+.\benv\Scripts\python.exe -m src.main combine-ncaa-games --plan config/ncaa_games_fixtures.json --output data/processed/fixture-rebuild/combined --expect-sha256 402921c1ad1bf0a74590ca360a972dc36eaf0ddb630e4a44651b17e9ec6df03f
+```
+
+Hashes are taken over the CSV text with LF line endings. On Windows the per-game CSV
+files are written with CRLF, so their on-disk SHA-256 differs from Linux; the
+`csv_sha256` in `quality_report.json` is the same on both. The manual
+`.github/workflows/rebuild-check.yml` workflow runs the same check on an Ubuntu
+runner, after a fresh install from `requirements-tested.txt`. It contacts no data
+source.
 
 `--affiliations` applies a season-specific division/conference mapping (also accepted
 by `process-ncaa`). An entry applies only when its season, sport, team ID and team name

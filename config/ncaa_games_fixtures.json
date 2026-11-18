@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "notice": "Rebuild check: the three validated games built from the committed sanitized fixtures (tests/fixtures) instead of the git-ignored raw saves under ankit/. extracted_at is pinned to each validated CSV's timestamp, and expected_csv_sha256 is the SHA-256 of that CSV's content with LF line endings (the csv_sha256 in its quality_report.json; Windows writes the file with CRLF, so its on-disk hash differs). No network access is used.",
+  "affiliations": "config/ncaa_team_affiliations.json",
+  "games": [
+    {
+      "game_id": "6643366",
+      "label": "Fixture rebuild: Ferrum at George Washington, 2026-11-16 (D-I scoreboard)",
+      "output": "data/processed/fixture-rebuild/ncaa-game-6643366",
+      "extracted_at": "2026-11-17T08:52:25.472821+00:00",
+      "expected_csv_sha256": "b964bb2dc4f6f8b6c72ea3d86ccc7963fa7778b2f1e2321e0ff770731028e4e9",
+      "scoreboard": ["tests/fixtures/ncaa_scoreboard_mbb_d1_2026-11-16.sanitized.html", "https://stats.ncaa.org/season_divisions/18983/livestream_scoreboards?game_date=11%2F16%2F2026&conference_id=0"],
+      "individual_stats": ["tests/fixtures/ncaa_individual_stats_6643366.sanitized.html", "https://stats.ncaa.org/contests/6643366/individual_stats"],
+      "box_score": ["tests/fixtures/ncaa_box_score_6643366.sanitized.html", "https://stats.ncaa.org/contests/6643366/box_score"],
+      "rosters": [
+        ["tests/fixtures/ncaa_roster_627529.sanitized.html", "https://stats.ncaa.org/teams/627529/roster"],
+        ["tests/fixtures/ncaa_roster_627884.sanitized.html", "https://stats.ncaa.org/teams/627884/roster"]
+      ]
+    },
+    {
+      "game_id": "6631754",
+      "label": "Fixture rebuild: Ferrum at Fairmont St., 2026-11-15 (D-II scoreboard)",
+      "output": "data/processed/fixture-rebuild/ncaa-game-6631754",
+      "extracted_at": "2026-11-17T08:52:26.412347+00:00",
+      "expected_csv_sha256": "c4a24d7f36d4cebaaab83f2ec7686b536e3f0ef4ebcf351d883ff166941b2f3d",
+      "scoreboard": ["tests/fixtures/ncaa_scoreboard_mbb_d2_2026-11-15.sanitized.html", "https://stats.ncaa.org/season_divisions/18984/livestream_scoreboards?game_date=11%2F15%2F2026&conference_id=0"],
+      "individual_stats": ["tests/fixtures/ncaa_individual_stats_6631754.sanitized.html", "https://stats.ncaa.org/contests/6631754/individual_stats"],
+      "box_score": ["tests/fixtures/ncaa_box_score_6631754.sanitized.html", "https://stats.ncaa.org/contests/6631754/box_score"],
+      "rosters": [
+        ["tests/fixtures/ncaa_roster_627590.sanitized.html", "https://stats.ncaa.org/teams/627590/roster"],
+        ["tests/fixtures/ncaa_roster_627884.sanitized.html", "https://stats.ncaa.org/teams/627884/roster"]
+      ]
+    },
+    {
+      "game_id": "6617400",
+      "label": "Fixture rebuild: Bowdoin at UChicago, 2026-11-14 (D-III scoreboard)",
+      "output": "data/processed/fixture-rebuild/ncaa-game-6617400",
+      "extracted_at": "2026-11-17T08:52:27.022053+00:00",
+      "expected_csv_sha256": "525bfea27869ea3e2588eaf4bed020073e07ecf5e565caffb509802c48b5999f",
+      "scoreboard": ["tests/fixtures/ncaa_scoreboard_mbb_d3_2026-11-14.sanitized.html", "https://stats.ncaa.org/season_divisions/18985/livestream_scoreboards?game_date=11%2F14%2F2026&conference_id=0"],
+      "individual_stats": ["tests/fixtures/ncaa_individual_stats_6617400.sanitized.html", "https://stats.ncaa.org/contests/6617400/individual_stats"],
+      "box_score": ["tests/fixtures/ncaa_box_score_6617400.sanitized.html", "https://stats.ncaa.org/contests/6617400/box_score"],
+      "rosters": [
+        ["tests/fixtures/ncaa_roster_628171.sanitized.html", "https://stats.ncaa.org/teams/628171/roster"],
+        ["tests/fixtures/ncaa_roster_628193.sanitized.html", "https://stats.ncaa.org/teams/628193/roster"]
+      ]
+    }
+  ]
+}
