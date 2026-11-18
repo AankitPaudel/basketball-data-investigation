@@ -132,7 +132,22 @@ What this means for the project:
 | Honest identity, no cookies, no credentials | User-Agent `BasketballDataResearch/0.1`; cookies cleared after each request; no token, cookie or authorization strings in either log |
 | Only harmless runner details recorded | Cloud log records only the allowlisted `RUNNER_*`, `ImageOS`/`ImageVersion` and `GITHUB_*` run identifiers; no IP addresses |
 | Cloud run only with approval | Workflow is manual (`workflow_dispatch`) and sends requests only when its input is `APPROVED` |
-| Validated CSVs untouched | SHA-256 before and after: `363d7b4e…`, `d27f590b…`, `a7f1b23b…` (unchanged) |
+| Validated CSVs untouched | SHA-256 before and after both probe runs: `363d7b4e…`, `d27f590b…`, `a7f1b23b…` (unchanged during Stage 3; see the note below on the later line-ending fix) |
+
+**Later change, made on purpose (2026-11-18, after this report):** the pipeline used to
+write CSVs in text mode, so on Windows its LF line endings became CRLF on disk. It now
+writes bytes, so files are LF on every platform. The three validated CSVs were converted
+from CRLF to LF. Only the line endings changed: the content, and the `csv_sha256` in each
+`quality_report.json`, are the same. Their on-disk hashes therefore changed:
+
+| Game | Rows | Old on-disk SHA-256 (CRLF, before 2026-11-18) | New on-disk SHA-256 (LF) = `csv_sha256` |
+|---|---|---|---|
+| 6643366 | 30 | `363d7b4ef70f67241e33081c2647eb724389b4e2807a985f750b5d5af1149f72` | `b964bb2dc4f6f8b6c72ea3d86ccc7963fa7778b2f1e2321e0ff770731028e4e9` |
+| 6631754 | 23 | `d27f590b1ce3913feb9e752d60c815587adc418deeb50e0859a95270f80f6c4f` | `c4a24d7f36d4cebaaab83f2ec7686b536e3f0ef4ebcf351d883ff166941b2f3d` |
+| 6617400 | 24 | `a7f1b23b26d4587592cb8839a53c86b707d30804b1e448b8321c1e5c69fac178` | `525bfea27869ea3e2588eaf4bed020073e07ecf5e565caffb509802c48b5999f` |
+
+The new hashes are also the ones the GitHub Actions rebuild check produced (run
+44234640697).
 
 ## Limitations
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "notice": "Rebuild check: the three validated games built from the committed sanitized fixtures (tests/fixtures) instead of the git-ignored raw saves under ankit/. extracted_at is pinned to each validated CSV's timestamp, and expected_csv_sha256 is the SHA-256 of that CSV's content with LF line endings (the csv_sha256 in its quality_report.json; the validated files were written with Windows CRLF before outputs became LF on every platform, so their on-disk hashes differ). No network access is used.",
+  "notice": "Rebuild check: the three validated games built from the committed sanitized fixtures (tests/fixtures) instead of the git-ignored raw saves under ankit/. extracted_at is pinned to each validated CSV's timestamp, and expected_csv_sha256 is the SHA-256 of that CSV's content with LF line endings (the csv_sha256 in its quality_report.json; since the 2026-11-18 line-ending fix this is also each validated file's on-disk SHA-256). No network access is used.",
   "affiliations": "config/ncaa_team_affiliations.json",
   "games": [
     {

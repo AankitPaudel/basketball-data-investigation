@@ -149,9 +149,11 @@ hash with `expected_csv_sha256`, and a mismatch gives exit code 2 with
 
 All outputs are written with LF line endings on every platform, so a rebuilt CSV's
 on-disk SHA-256 equals the `csv_sha256` in its `quality_report.json`, locally and in the
-cloud. (The three validated CSVs were written before this change, with Windows CRLF
-line endings. They are left untouched, so their on-disk hashes, `363d7b4e…`,
-`d27f590b…` and `a7f1b23b…`, differ from their LF content hashes.) The manual
+cloud. The three validated CSVs were first written on Windows with CRLF line endings;
+on 2026-11-18 they were deliberately converted to LF (line endings only, content
+unchanged). Their baseline hashes are now `b964bb2d…`, `c4a24d7f…` and `525bfea2…`,
+replacing `363d7b4e…`, `d27f590b…` and `a7f1b23b…`; the full table is in
+[docs/process_writeup.md](docs/process_writeup.md) section 7. The manual
 `.github/workflows/rebuild-check.yml` workflow runs the same check on an Ubuntu
 runner, after a fresh install from `requirements-tested.txt`. It contacts no data
 source.

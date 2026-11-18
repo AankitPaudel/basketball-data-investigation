@@ -303,7 +303,9 @@ def process_bundle(bundle, base=Path(".")):
 
 def write_atomic(path, text):
     temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(text, encoding="utf-8", newline="")  # LF on every platform
+    # Bytes, not text mode: no newline translation, so the file is LF on every platform
+    # and its SHA-256 equals the content hash recorded in quality_report.json.
+    temporary.write_bytes(text.encode("utf-8"))
     temporary.replace(path)
 
 

@@ -1,11 +1,13 @@
 """Run with python -m src.main from the repository root."""
 import argparse
 import json
+from datetime import date, datetime, timezone
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from .common.export import export_records
 from .common.http_client import validate_url
-from .common.probe import Probe, load_config, plan_requests
+from .common.probe import POLICY_ONLY_HOSTS, Probe, load_config, plan_requests
 from .common.sanitize import sanitize_html
 from .common.validation import validate
 from .ncaa.boxscore_parser import parse_boxscore as ncaa_boxscore
@@ -17,6 +19,10 @@ from .ncaa.discovery import write_discovery
 from .ncaa.pipeline import run_pipeline, write_atomic
 from .ncaa.real_game import build_bundle
 from .ncaa.scoreboard_parser import parse_scoreboard
+from .school.compare import compare, write_comparison
+from .school.fetcher import FetchRefused, SchoolFetcher
+from .school.pacing import HostPacer
+from .school.sidearm_boxscore import parse_sidearm_boxscore
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -101,6 +107,52 @@ def build_plan(plan_path, only=None):
     return status
 
 
+def _iso_date(value):
+    try:
+        return date.fromisoformat(value)
+    except ValueError:
+        raise argparse.ArgumentTypeError("use YYYY-MM-DD") from None
+
+
+def fetch_school_boxscore(args):
+    """Plan or run: robots -> schedule -> box score, then parse and compare. Exit 3 on any policy stop."""
+    schedule = urlsplit(args.schedule_url)
+    if schedule.scheme != "https" or schedule.hostname != args.host or schedule.username or schedule.port:
+        raise ValueError("--schedule-url must be an HTTPS URL on --host")
+    if args.host in POLICY_ONLY_HOSTS or args.host.endswith("ncaa.org"):
+        raise ValueError("NCAA hosts are manual-only; this command is for school athletics sites")
+    if not (args.ncaa_game_dir / "manifest.json").exists():
+        raise ValueError(f"{args.ncaa_game_dir} is not a built NCAA game folder")
+    if "exports" in args.output.parts:
+        raise ValueError("Comparison output never goes to data/exports")
+    log = args.log or Path(f"logs/school-fetch-{args.host}-{datetime.now(timezone.utc):%Y-%m-%d}.jsonl")
+    raw_dir = args.raw_dir or Path("data/raw/school") / args.host
+    plan = {"host": args.host, "requests_in_order": [f"https://{args.host}/robots.txt", args.schedule_url,
+            f"box score for {args.opponent!r} on {args.date.isoformat()} (found on the schedule page)"],
+            "delay": "max(10 s, robots Crawl-delay) since the last request to the host, persisted in "
+                     + args.pacing_state.as_posix(), "log": log.as_posix(), "raw_dir": raw_dir.as_posix(),
+            "compare_with": args.ncaa_game_dir.as_posix(), "output": args.output.as_posix()}
+    if not args.execute:
+        print(json.dumps({"dry_run": True, **plan}, indent=2))
+        return 0
+    fetcher = SchoolFetcher(args.host, log, args.environment, args.region, pacer=HostPacer(args.pacing_state))
+    try:
+        box_url, html, saved = fetcher.fetch_game(args.schedule_url, args.opponent, args.date, raw_dir)
+    except FetchRefused as exc:
+        print(json.dumps({"stopped": str(exc), "requests": fetcher.requests, "log": log.as_posix()}, indent=2))
+        return 3
+    parsed = parse_sidearm_boxscore(html, box_url)
+    report = compare(parsed, args.ncaa_game_dir)
+    write_comparison(parsed, report, args.output)
+    counts = report["counts"]
+    print(json.dumps({"boxscore_url": box_url, "saved": saved.as_posix(), "requests": fetcher.requests,
+                      "counts": counts, "school_source_checks_failed": len(report["school_source_checks_failed"]),
+                      "output": args.output.as_posix()}, indent=2))
+    clean = (not report["unmatched"] and not report["school_source_checks_failed"]
+             and counts["matched_all_stats_agree"] == counts["matched"])
+    return 0 if clean else 2
+
+
 def build_parser():
     parser = argparse.ArgumentParser(description="NCAA basketball diagnostics, parsing, and enrichment")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -153,6 +205,22 @@ def build_parser():
     combine.add_argument("--only", nargs="+", metavar="GAME_ID", help="Combine only these game IDs")
     combine.add_argument("--output", type=Path, default=Path("data/processed/ncaa-combined"))
     combine.add_argument("--expect-sha256", help="Exit 2 unless the combined CSV has this SHA-256 (rebuild check)")
+    school = commands.add_parser("fetch-school-boxscore",
+        help="Fetch one game's box score from a permitted Sidearm school site and compare it with an NCAA game")
+    school.add_argument("--host", required=True, help="School athletics host, e.g. athletics.bowdoin.edu")
+    school.add_argument("--schedule-url", required=True, help="HTTPS schedule page on --host listing the game")
+    school.add_argument("--opponent", required=True, help="Opponent name as shown on the schedule (substring)")
+    school.add_argument("--date", required=True, type=_iso_date, help="Game date, YYYY-MM-DD")
+    school.add_argument("--ncaa-game-dir", type=Path, required=True,
+                        help="Validated NCAA game folder to compare against (read only)")
+    school.add_argument("--output", type=Path, required=True)
+    school.add_argument("--environment", required=True, help="Label, e.g. local-windows")
+    school.add_argument("--region", default="unknown")
+    school.add_argument("--log", type=Path, help="Request log (default logs/school-fetch-<host>-<UTC date>.jsonl)")
+    school.add_argument("--raw-dir", type=Path, help="Where the fetched pages are saved (default data/raw/school/<host>)")
+    school.add_argument("--pacing-state", type=Path, default=Path("logs/host-pacing-state.json"))
+    school.add_argument("--execute", action="store_true",
+                        help="Actually send requests (otherwise print the plan; no network access)")
     probe = commands.add_parser("probe", help="Robots-respecting access probe; dry run unless --execute")
     probe.add_argument("--config", type=Path, default=Path("config/access_probe_urls.json"))
     probe.add_argument("--environment", required=True, help="Label, e.g. local-windows or cloud-github-actions-ubuntu")
@@ -199,6 +267,8 @@ def main(argv=None):
             return status
         if args.command == "build-ncaa-games":
             return build_plan(args.plan, args.only)
+        if args.command == "fetch-school-boxscore":
+            return fetch_school_boxscore(args)
         if args.command == "combine-ncaa-games":
             report = combine_games(args.plan, args.output, args.only)
             summary = {key: report[key] for key in ("csv", "csv_sha256", "rows", "games", "provenance",
