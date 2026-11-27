@@ -66,7 +66,8 @@ plus a test of whether collection works the same locally and in the cloud.
   - All 30 permitted pages (NCAA Directory and school or conference sites) loaded in
     both environments.
   - stats.ncaa.org served robots.txt to the laptop but answered the cloud runner with
-    a 403 challenge page.
+    an HTML 403. The archived flag cannot establish verification or the exact rule.
+    [Phase 2 evidence review](stage3_local_vs_cloud_report.md#phase-2--http-403-root-cause-investigation)
   - Neither run requested a stats page.
 - **Conclusion:** the cloud offers no extra access, so hand-saved pages stay the only
   source for NCAA statistics.
@@ -107,7 +108,7 @@ plus a test of whether collection works the same locally and in the cloud.
 ## 9. Automated collection from permitted school sites (approach 2)
 
 **Why:** stats.ncaa.org disallows automated access, and from the cloud it answered
-with a 403 challenge page (sections 1 and 6). The schools' own athletics sites publish
+with an HTML 403 (sections 1 and 6). The schools' own athletics sites publish
 box scores too, and Stage 3 showed they answer normal requests from both environments.
 So the second approach collects from those sites, but only where their robots.txt
 allows it.

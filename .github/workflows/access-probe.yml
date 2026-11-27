@@ -1,8 +1,5 @@
-# Stage 3 cloud side of the local vs. cloud access comparison (docs/stage3_access_test_plan.md).
-# Manual trigger only. Without the exact approval text, it runs the offline tests and a
-# dry run, and sends no probe requests. The probe itself checks robots.txt per host,
-# waits >= 10 s per host and >= 600 s between rounds, and stops a host on
-# 401/403/429/Retry-After/challenge/login pages.
+# Manual one-request NCAA robots diagnostic. Dry by default. An approved UTC
+# window gates the first run attempt only, even if runner setup is delayed.
 name: Stage 3 access probe (manual)
 
 on:
@@ -12,6 +9,10 @@ on:
         description: "Type APPROVED to send the probe's requests (anything else = offline tests + dry run only)"
         required: true
         default: "no"
+      window_start_utc:
+        description: "Required for an approved run. Start of the two-minute window (YYYY-MM-DDTHH:MM:SSZ)"
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -29,6 +30,7 @@ jobs:
     env:
       PROBE_ENVIRONMENT: cloud-github-actions-ubuntu
       PROBE_REGION: unknown
+      PROBE_CONFIG: config/ncaa_robots_probe.json
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -41,23 +43,36 @@ jobs:
           python-version: "3.13"
 
       - name: Install dependencies
-        run: python -m pip install -r requirements.txt
+        run: python -m pip install -r requirements-tested.txt
 
       - name: Offline tests (no probe network access)
         run: python -m unittest discover -s tests
 
       - name: Dry run (prints the planned requests; no network access)
-        run: python -m src.main probe --environment "$PROBE_ENVIRONMENT" --region "$PROBE_REGION" --output probe-logs
+        shell: bash
+        run: |
+          mkdir -p probe-logs
+          python -m src.main probe --config "$PROBE_CONFIG" --capture-diagnostics --environment "$PROBE_ENVIRONMENT" --region "$PROBE_REGION" --output probe-logs | tee probe-logs/plan.json
+          printf '### Access probe plan\n\n```json\n' >> "$GITHUB_STEP_SUMMARY"
+          cat probe-logs/plan.json >> "$GITHUB_STEP_SUMMARY"
+          printf '```\n' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Probe (sends requests; only with explicit approval)
-        if: ${{ inputs.approve_network_requests == 'APPROVED' }}
-        run: python -m src.main probe --execute --environment "$PROBE_ENVIRONMENT" --region "$PROBE_REGION" --output probe-logs
+        if: ${{ inputs.approve_network_requests == 'APPROVED' && github.run_attempt == '1' }}
+        env:
+          PROBE_WINDOW_START: ${{ inputs.window_start_utc }}
+        shell: bash
+        run: |
+          python -m src.main probe --execute --config "$PROBE_CONFIG" --capture-diagnostics --window-start-utc "$PROBE_WINDOW_START" --environment "$PROBE_ENVIRONMENT" --region "$PROBE_REGION" --output probe-logs | tee probe-logs/result.json
+          printf '### Access probe result\n\n```json\n' >> "$GITHUB_STEP_SUMMARY"
+          cat probe-logs/result.json >> "$GITHUB_STEP_SUMMARY"
+          printf '```\n' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload probe logs
-        if: ${{ always() && inputs.approve_network_requests == 'APPROVED' }}
+        if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
-          name: access-probe-logs-${{ github.run_id }}
+          name: access-probe-logs-${{ github.run_id }}-${{ github.run_attempt }}
           path: probe-logs/
           if-no-files-found: warn
           retention-days: 30

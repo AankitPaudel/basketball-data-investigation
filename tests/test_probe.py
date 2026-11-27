@@ -347,7 +347,7 @@ class WorkflowTests(unittest.TestCase):
         steps = text.split("- name: ")
         gated = [step for step in steps if "--execute" in step]
         self.assertEqual(len(gated), 1)
-        self.assertIn("if: ${{ inputs.approve_network_requests == 'APPROVED' }}", gated[0])
+        self.assertIn("if: ${{ inputs.approve_network_requests == 'APPROVED' && github.run_attempt == '1' }}", gated[0])
         self.assertIn('default: "no"', text)
 
 

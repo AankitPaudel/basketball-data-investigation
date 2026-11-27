@@ -19,10 +19,11 @@ class NCAAClient(HttpClient):
         policy = super().fetch(policy_url)
         permitted = False
         outcome = "robots_unavailable"
-        if policy.report.get("status_code") == 404:
+        if policy.report.get("outcome") == "not_found":
             permitted = True
         elif (policy.report.get("status_code") == 200 and policy.text is not None
-              and policy.report.get("content_type", "").lower() == "text/plain"):
+              and policy.report.get("content_type", "").lower() == "text/plain"
+              and policy.report.get("outcome") == "non_html_response"):
             rules = RobotFileParser()
             rules.parse(policy.text.splitlines())
             permitted = rules.can_fetch("BasketballDataResearch", url)
@@ -33,6 +34,7 @@ class NCAAClient(HttpClient):
         report = {"source": "ncaa", "requested_url": safe_url(url), "final_url": None,
                   "environment": self.environment, "checked_at": utc_now(),
                   "outcome": outcome, "status_code": None, "attempts": [],
+                  "classification": "robots_policy_restriction",
                   "redirect_history": [], "policy_url": policy_url,
                   "policy_status_code": policy.report.get("status_code"),
                   "target_requested": False}

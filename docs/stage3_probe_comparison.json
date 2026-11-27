@@ -1,0 +1,967 @@
+{
+  "schema_version": 1,
+  "url": "https://stats.ncaa.org/robots.txt",
+  "observation": "Access behavior differs between the recorded observations.",
+  "exact_root_cause": "undetermined",
+  "interpretation": "A status difference and any provider indicators are observations. Rule attribution requires independent evidence.",
+  "left": {
+    "source": {
+      "file": "access-probe-local-windows-20261117T091002Z-139ccdba.jsonl",
+      "sha256": "8e91f7612cca905baa0beab309c8c0980d4cfafdd0cc642c5a8bfde0d37086d7",
+      "run_id": "20261117T091002Z-139ccdba"
+    },
+    "metadata": {
+      "environment": "local-windows",
+      "started_at": "2026-11-17T09:10:02.809958+00:00",
+      "region": "unknown",
+      "platform": "Windows-11",
+      "python": "3.13.5",
+      "requests": "2.34.2",
+      "urllib3": null,
+      "runner": {},
+      "config_sha256": "a551f0cb8ae83479491b3e6ee5221d6093da586c53fe2566a69533a3018b99a1",
+      "proxy_environment_configured": null,
+      "no_proxy_environment_configured": null,
+      "network_provider": null
+    },
+    "missing_environment_fields": [
+      "region",
+      "urllib3",
+      "proxy_environment_configured",
+      "no_proxy_environment_configured",
+      "network_provider"
+    ],
+    "finished_at": "2026-11-17T09:32:14.528992+00:00",
+    "reported_requests_sent": 37,
+    "reported_stopped_hosts": {},
+    "robots_policy": {
+      "decision": "parsed",
+      "status_code": 200,
+      "outcome": "non_html_response",
+      "sha256": "bbc40843f680a627ec7b1bc2a7693b01c2f8522d6bae1b15ee5396ee0e0616db",
+      "elapsed_seconds": 0.984
+    },
+    "focus_observations": [
+      {
+        "line": 2,
+        "checked_at": "2026-11-17T09:10:02.811988+00:00",
+        "method": null,
+        "outcome": "non_html_response",
+        "classification": "success",
+        "status_code": 200,
+        "elapsed_seconds": 0.984,
+        "legacy_challenge_flag": null,
+        "redirect_history": [],
+        "attempts": [
+          {
+            "method": null,
+            "status_code": 200,
+            "content_type": "text/plain",
+            "response_bytes": 202,
+            "body_sha256": "bbc40843f680a627ec7b1bc2a7693b01c2f8522d6bae1b15ee5396ee0e0616db",
+            "elapsed_seconds": 0.984,
+            "retry_after_present": false,
+            "response_signals": null,
+            "reference_ids": null,
+            "destination_hostname": null,
+            "dns": null,
+            "http_version": null,
+            "peer_address": null,
+            "error_category": null,
+            "url": "https://stats.ncaa.org/robots.txt",
+            "classification": "success",
+            "request_headers": null,
+            "response_headers": null,
+            "missing_fields": [
+              "method",
+              "request_headers",
+              "response_headers",
+              "response_signals",
+              "reference_ids",
+              "destination_hostname",
+              "dns",
+              "http_version",
+              "peer_address"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "right": {
+    "source": {
+      "file": "access-probe-cloud-github-actions-ubuntu-20261117T170914Z-caec4a2d.jsonl",
+      "sha256": "97c859fdd6f5842e6149cb97b7b83daa020cf17e3c3cd5e92f15b2e5a141730e",
+      "run_id": "20261117T170914Z-caec4a2d"
+    },
+    "metadata": {
+      "environment": "cloud-github-actions-ubuntu",
+      "started_at": "2026-11-17T17:09:14.891643+00:00",
+      "region": "unknown",
+      "platform": "Linux-7.0.0-1019-azure-x86_64-with-glibc2.43",
+      "python": "3.13.18",
+      "requests": "2.34.2",
+      "urllib3": null,
+      "runner": {
+        "RUNNER_OS": "Linux",
+        "RUNNER_ARCH": "X64",
+        "RUNNER_ENVIRONMENT": "github-hosted",
+        "RUNNER_NAME": "GitHub Actions 1000000031",
+        "ImageOS": "ubuntu26",
+        "ImageVersion": "20261111.196.1",
+        "GITHUB_RUN_ID": "44133732954",
+        "GITHUB_RUN_ATTEMPT": "1",
+        "GITHUB_WORKFLOW": "Stage 3 access probe (manual)",
+        "GITHUB_REPOSITORY": "AankitPaudel/basketball-data-investigation"
+      },
+      "config_sha256": "df345497a9580ffa00097ccdd9f020bd91718d58bddf4cae0adb076ea719819e",
+      "proxy_environment_configured": null,
+      "no_proxy_environment_configured": null,
+      "network_provider": null
+    },
+    "missing_environment_fields": [
+      "region",
+      "urllib3",
+      "proxy_environment_configured",
+      "no_proxy_environment_configured",
+      "network_provider"
+    ],
+    "finished_at": "2026-11-17T17:31:25.583828+00:00",
+    "reported_requests_sent": 37,
+    "reported_stopped_hosts": {
+      "stats.ncaa.org": "forbidden"
+    },
+    "robots_policy": {
+      "decision": "unavailable_fail_closed",
+      "status_code": 403,
+      "outcome": "forbidden",
+      "sha256": "70d355a6d7e2b4cf8716896c7cf70f7620170f8ac92ae08ff01dbaf77c3004ef",
+      "elapsed_seconds": 0.256
+    },
+    "focus_observations": [
+      {
+        "line": 2,
+        "checked_at": "2026-11-17T17:09:14.891970+00:00",
+        "method": null,
+        "outcome": "forbidden",
+        "classification": "access_denial",
+        "status_code": 403,
+        "elapsed_seconds": 0.256,
+        "legacy_challenge_flag": true,
+        "redirect_history": [],
+        "attempts": [
+          {
+            "method": null,
+            "status_code": 403,
+            "content_type": "text/html",
+            "response_bytes": 382,
+            "body_sha256": "70d355a6d7e2b4cf8716896c7cf70f7620170f8ac92ae08ff01dbaf77c3004ef",
+            "elapsed_seconds": 0.256,
+            "retry_after_present": false,
+            "response_signals": null,
+            "reference_ids": null,
+            "destination_hostname": null,
+            "dns": null,
+            "http_version": null,
+            "peer_address": null,
+            "error_category": null,
+            "url": "https://stats.ncaa.org/robots.txt",
+            "classification": "access_denial",
+            "request_headers": null,
+            "response_headers": null,
+            "missing_fields": [
+              "method",
+              "request_headers",
+              "response_headers",
+              "response_signals",
+              "reference_ids",
+              "destination_hostname",
+              "dns",
+              "http_version",
+              "peer_address"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "focus_differences": [
+    "status_code",
+    "classification",
+    "content_type",
+    "response_bytes",
+    "body_sha256",
+    "elapsed_seconds"
+  ],
+  "environment_differences": [
+    "environment",
+    "started_at",
+    "platform",
+    "python",
+    "runner",
+    "config_sha256"
+  ],
+  "endpoints": [
+    {
+      "url": "https://athletics.bowdoin.edu/robots.txt",
+      "left": {
+        "lines": [
+          6
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "non_html_response": 1
+        },
+        "classifications": {
+          "success": 1
+        },
+        "status_codes": [
+          200
+        ],
+        "attempt_count": 1
+      },
+      "right": {
+        "lines": [
+          6
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "non_html_response": 1
+        },
+        "classifications": {
+          "success": 1
+        },
+        "status_codes": [
+          200
+        ],
+        "attempt_count": 1
+      }
+    },
+    {
+      "url": "https://athletics.bowdoin.edu/sports/mens-basketball/schedule/2026-27",
+      "left": {
+        "lines": [
+          13,
+          25,
+          37
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      },
+      "right": {
+        "lines": [
+          13,
+          25,
+          37
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      }
+    },
+    {
+      "url": "https://athletics.uchicago.edu/robots.txt",
+      "left": {
+        "lines": [
+          7
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "non_html_response": 1
+        },
+        "classifications": {
+          "success": 1
+        },
+        "status_codes": [
+          200
+        ],
+        "attempt_count": 1
+      },
+      "right": {
+        "lines": [
+          7
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "non_html_response": 1
+        },
+        "classifications": {
+          "success": 1
+        },
+        "status_codes": [
+          200
+        ],
+        "attempt_count": 1
+      }
+    },
+    {
+      "url": "https://athletics.uchicago.edu/sports/mens-basketball/schedule/2026-27",
+      "left": {
+        "lines": [
+          14,
+          26,
+          38
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      },
+      "right": {
+        "lines": [
+          14,
+          26,
+          38
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      }
+    },
+    {
+      "url": "https://atlantic10.com/news/2026/9/29/atlantic-10-announces-2026-27-mens-basketball-conference-schedule.aspx",
+      "left": {
+        "lines": [
+          15,
+          27,
+          39
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      },
+      "right": {
+        "lines": [
+          15,
+          27,
+          39
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      }
+    },
+    {
+      "url": "https://atlantic10.com/robots.txt",
+      "left": {
+        "lines": [
+          8
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "non_html_response": 1
+        },
+        "classifications": {
+          "success": 1
+        },
+        "status_codes": [
+          200
+        ],
+        "attempt_count": 1
+      },
+      "right": {
+        "lines": [
+          8
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "non_html_response": 1
+        },
+        "classifications": {
+          "success": 1
+        },
+        "status_codes": [
+          200
+        ],
+        "attempt_count": 1
+      }
+    },
+    {
+      "url": "https://ferrumpanthers.com/robots.txt",
+      "left": {
+        "lines": [
+          4
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "non_html_response": 1
+        },
+        "classifications": {
+          "success": 1
+        },
+        "status_codes": [
+          200
+        ],
+        "attempt_count": 1
+      },
+      "right": {
+        "lines": [
+          4
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "non_html_response": 1
+        },
+        "classifications": {
+          "success": 1
+        },
+        "status_codes": [
+          200
+        ],
+        "attempt_count": 1
+      }
+    },
+    {
+      "url": "https://ferrumpanthers.com/sports/mens-basketball/schedule/2026-27",
+      "left": {
+        "lines": [
+          11,
+          23,
+          35
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      },
+      "right": {
+        "lines": [
+          11,
+          23,
+          35
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      }
+    },
+    {
+      "url": "https://fightingfalcons.com/robots.txt",
+      "left": {
+        "lines": [
+          5
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "non_html_response": 1
+        },
+        "classifications": {
+          "success": 1
+        },
+        "status_codes": [
+          200
+        ],
+        "attempt_count": 1
+      },
+      "right": {
+        "lines": [
+          5
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "non_html_response": 1
+        },
+        "classifications": {
+          "success": 1
+        },
+        "status_codes": [
+          200
+        ],
+        "attempt_count": 1
+      }
+    },
+    {
+      "url": "https://fightingfalcons.com/sports/mens-basketball/schedule/2026-27",
+      "left": {
+        "lines": [
+          12,
+          24,
+          36
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      },
+      "right": {
+        "lines": [
+          12,
+          24,
+          36
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      }
+    },
+    {
+      "url": "https://stats.ncaa.org/contests/6643366/individual_stats",
+      "left": {
+        "lines": [
+          16,
+          28,
+          40
+        ],
+        "kind": "target",
+        "outcomes": {
+          "robots_disallowed": 3
+        },
+        "classifications": {
+          "robots_policy_restriction": 3
+        },
+        "status_codes": [
+          null,
+          null,
+          null
+        ],
+        "attempt_count": 0
+      },
+      "right": {
+        "lines": [
+          16,
+          28,
+          40
+        ],
+        "kind": "target",
+        "outcomes": {
+          "skipped_host_stopped": 3
+        },
+        "classifications": {
+          "not_requested": 3
+        },
+        "status_codes": [
+          null,
+          null,
+          null
+        ],
+        "attempt_count": 0
+      }
+    },
+    {
+      "url": "https://stats.ncaa.org/robots.txt",
+      "left": {
+        "lines": [
+          2
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "non_html_response": 1
+        },
+        "classifications": {
+          "success": 1
+        },
+        "status_codes": [
+          200
+        ],
+        "attempt_count": 1
+      },
+      "right": {
+        "lines": [
+          2
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "forbidden": 1
+        },
+        "classifications": {
+          "access_denial": 1
+        },
+        "status_codes": [
+          403
+        ],
+        "attempt_count": 1
+      }
+    },
+    {
+      "url": "https://stats.ncaa.org/season_divisions/18983/livestream_scoreboards?game_date=11%2F16%2F2026&conference_id=0",
+      "left": {
+        "lines": [
+          9,
+          21,
+          33
+        ],
+        "kind": "target",
+        "outcomes": {
+          "robots_disallowed": 3
+        },
+        "classifications": {
+          "robots_policy_restriction": 3
+        },
+        "status_codes": [
+          null,
+          null,
+          null
+        ],
+        "attempt_count": 0
+      },
+      "right": {
+        "lines": [
+          9,
+          21,
+          33
+        ],
+        "kind": "target",
+        "outcomes": {
+          "skipped_host_stopped": 3
+        },
+        "classifications": {
+          "not_requested": 3
+        },
+        "status_codes": [
+          null,
+          null,
+          null
+        ],
+        "attempt_count": 0
+      }
+    },
+    {
+      "url": "https://web3.ncaa.org/directory/orgDetail?id=1076",
+      "left": {
+        "lines": [
+          18,
+          30,
+          42
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      },
+      "right": {
+        "lines": [
+          18,
+          30,
+          42
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      }
+    },
+    {
+      "url": "https://web3.ncaa.org/directory/orgDetail?id=137",
+      "left": {
+        "lines": [
+          20,
+          32,
+          44
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      },
+      "right": {
+        "lines": [
+          20,
+          32,
+          44
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      }
+    },
+    {
+      "url": "https://web3.ncaa.org/directory/orgDetail?id=225",
+      "left": {
+        "lines": [
+          17,
+          29,
+          41
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      },
+      "right": {
+        "lines": [
+          17,
+          29,
+          41
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      }
+    },
+    {
+      "url": "https://web3.ncaa.org/directory/orgDetail?id=249",
+      "left": {
+        "lines": [
+          10,
+          22,
+          34
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      },
+      "right": {
+        "lines": [
+          10,
+          22,
+          34
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      }
+    },
+    {
+      "url": "https://web3.ncaa.org/directory/orgDetail?id=69",
+      "left": {
+        "lines": [
+          19,
+          31,
+          43
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      },
+      "right": {
+        "lines": [
+          19,
+          31,
+          43
+        ],
+        "kind": "target",
+        "outcomes": {
+          "html_available": 3
+        },
+        "classifications": {
+          "success": 3
+        },
+        "status_codes": [
+          200,
+          200,
+          200
+        ],
+        "attempt_count": 3
+      }
+    },
+    {
+      "url": "https://web3.ncaa.org/robots.txt",
+      "left": {
+        "lines": [
+          3
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "non_html_response": 1
+        },
+        "classifications": {
+          "success": 1
+        },
+        "status_codes": [
+          200
+        ],
+        "attempt_count": 1
+      },
+      "right": {
+        "lines": [
+          3
+        ],
+        "kind": "robots",
+        "outcomes": {
+          "non_html_response": 1
+        },
+        "classifications": {
+          "success": 1
+        },
+        "status_codes": [
+          200
+        ],
+        "attempt_count": 1
+      }
+    }
+  ]
+}

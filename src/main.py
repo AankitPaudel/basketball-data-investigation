@@ -1,13 +1,17 @@
 """Run with python -m src.main from the repository root."""
 import argparse
 import json
+import re
 from datetime import date, datetime, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
 
 from .common.export import export_records
 from .common.http_client import validate_url
-from .common.probe import POLICY_ONLY_HOSTS, Probe, load_config, plan_requests
+from .common.models import utc_now
+from .common.probe import (NCAA_ROBOTS_URL, POLICY_ONLY_HOSTS, Probe, diagnostic_metadata, diagnostic_plan, load_config,
+                           plan_requests, request_window, runner_metadata)
+from .common.probe_comparison import compare_runs, write_comparison as write_probe_comparison
 from .common.sanitize import sanitize_html
 from .common.validation import validate
 from .ncaa.boxscore_parser import parse_boxscore as ncaa_boxscore
@@ -228,6 +232,18 @@ def build_parser():
     probe.add_argument("--output", type=Path, default=Path("logs"))
     probe.add_argument("--execute", action="store_true",
                        help="Actually send requests (only after the run has been approved)")
+    probe.add_argument("--capture-diagnostics", action="store_true",
+                       help="Include sanitized HTTP and destination network metadata; DNS only with --execute")
+    probe.add_argument("--window-start-utc", help="Start of an approved 120-second NCAA robots window (YYYY-MM-DDTHH:MM:SSZ)")
+    probe.add_argument("--network-provider", help="Verified network provider name, if known")
+    probe.add_argument("--network-asn", type=int, help="Verified network ASN as a number, if known")
+    probe.add_argument("--network-source", choices=("operator", "provider-console", "existing-network-record"),
+                       help="Provenance for an operator-supplied provider or ASN; no external lookup")
+    comparison = commands.add_parser("compare-probes", help="Compare two saved JSONL probe runs offline")
+    comparison.add_argument("left", type=Path, help="First diagnostic JSONL log")
+    comparison.add_argument("right", type=Path, help="Second diagnostic JSONL log")
+    comparison.add_argument("--url", default=NCAA_ROBOTS_URL, help="Endpoint to compare in detail (default: NCAA robots.txt)")
+    comparison.add_argument("--output", type=Path, help="Write JSON to this path (default: print JSON)")
     sanitize = commands.add_parser("sanitize-html", help="Remove scripts and session tokens from a saved page")
     sanitize.add_argument("--file", type=Path, required=True)
     sanitize.add_argument("--output", type=Path, required=True)
@@ -239,19 +255,49 @@ def build_parser():
     return parser
 
 
+def probe_network_provider(args):
+    if not (args.network_provider is not None or args.network_asn is not None or args.network_source):
+        return None
+    if not args.capture_diagnostics or not args.network_source or (args.network_provider is None and args.network_asn is None):
+        raise ValueError("Network attribution requires --capture-diagnostics, --network-source and a provider or ASN")
+    if args.network_provider is not None and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9 .&()-]{0,79}", args.network_provider):
+        raise ValueError("Supply a short public network provider name")
+    if args.network_asn is not None and not 1 <= args.network_asn <= 4294967295:
+        raise ValueError("Network ASN must be a positive 32-bit AS number")
+    return {"provider": args.network_provider, "asn": args.network_asn, "source": args.network_source}
+
+
 def main(argv=None):
     args = build_parser().parse_args(argv)
     try:
         if args.command == "probe":
             config = load_config(args.config)
+            provider = probe_network_provider(args)
+            window = request_window(config, args.window_start_utc)
+            if window and not args.capture_diagnostics:
+                raise ValueError("An execution window requires --capture-diagnostics")
             if not args.execute:
                 # Dry run: show exactly what would be requested; no network access.
-                print(json.dumps({"dry_run": True, "environment": args.environment, "region": args.region,
-                                  "config_sha256": config["config_sha256"], **plan_requests(config)}, indent=2))
+                plan = {"dry_run": True, "environment": args.environment, "region": args.region,
+                        "config_sha256": config["config_sha256"], **plan_requests(config)}
+                if args.capture_diagnostics:
+                    plan.update({**runner_metadata(args.region), **diagnostic_metadata(),
+                                 **diagnostic_plan(config, window),
+                                 "checked_at": utc_now(), "network_provider": provider})
+                print(json.dumps(plan, indent=2))
                 return 0
-            summary = Probe(config, environment=args.environment, region=args.region, output=args.output).run()
-            print(json.dumps({key: summary[key] for key in ("run_id", "log", "summary", "requests_sent", "stopped_hosts")},
+            summary = Probe(config, environment=args.environment, region=args.region, output=args.output,
+                            capture_diagnostics=args.capture_diagnostics, network_provider=provider, window=window).run()
+            print(json.dumps({key: summary[key] for key in ("run_id", "log", "summary", "requests_sent", "stopped_hosts", "robots")},
                              indent=2))
+            return 3 if window and not summary["requests_sent"] else 0
+        if args.command == "compare-probes":
+            report = compare_runs(args.left, args.right, args.url)
+            if args.output:
+                write_probe_comparison(report, args.output, (args.left, args.right))
+                print(json.dumps({"output": str(args.output), "observation": report["observation"]}))
+            else:
+                print(json.dumps(report, indent=2))
             return 0
         if args.command == "sanitize-html":
             args.output.parent.mkdir(parents=True, exist_ok=True)

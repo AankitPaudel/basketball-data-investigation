@@ -7,23 +7,27 @@ Rules enforced here (see docs/stage3_access_test_plan.md):
   401/403/429, a Retry-After backoff, a challenge/CAPTCHA page or a login page;
 - at least `min_delay_seconds` (>= 10) between requests to the same host and
   `round_interval_seconds` (>= 600) between rounds;
-- dry run unless `execute=True`; no cookies, proxies, IP or credential logging.
+- dry run unless `execute=True`; no cookies, proxy values, egress IP or credential logging.
 """
 import csv
 import hashlib
 import json
 import os
 import platform
+import socket
+import ssl
 import statistics
 import time
 import uuid
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
 from urllib.robotparser import RobotFileParser
 
 import requests
+import urllib3
 
-from .http_client import HttpClient, safe_url
+from .http_client import REQUEST_HEADERS, HttpClient, safe_url
 from .models import utc_now
 
 USER_AGENT = "BasketballDataResearch"
@@ -34,12 +38,16 @@ MAX_REQUESTS = 60
 # Hosts whose pages are never fetched automatically, whatever robots.txt says: only the
 # policy (robots.txt) is read and the robots decision for each URL is recorded.
 POLICY_ONLY_HOSTS = {"stats.ncaa.org"}
+NCAA_ROBOTS_URL = "https://stats.ncaa.org/robots.txt"
+PROBE_TIMEOUT_SECONDS = 20
+REQUEST_WINDOW_SECONDS = 120
 # Outcomes after which the host receives no further requests in this run.
 STOP_OUTCOMES = {"authentication_required", "forbidden", "rate_limited", "server_requested_backoff",
                  "access_challenge", "login_required"}
 # Runner facts that are safe to record. Tokens, secrets and IPs are never read.
 METADATA_VARIABLES = ("RUNNER_OS", "RUNNER_ARCH", "RUNNER_ENVIRONMENT", "RUNNER_NAME", "ImageOS",
-                      "ImageVersion", "GITHUB_RUN_ID", "GITHUB_RUN_ATTEMPT", "GITHUB_WORKFLOW", "GITHUB_REPOSITORY")
+                      "ImageVersion", "GITHUB_RUN_ID", "GITHUB_RUN_ATTEMPT", "GITHUB_WORKFLOW", "GITHUB_REPOSITORY",
+                      "GITHUB_SHA")
 SUMMARY_COLUMNS = ["environment", "region", "host", "url", "purpose", "attempts", "outcomes", "status_codes",
                    "median_seconds", "max_seconds", "network_errors", "robots_outcome", "robots_sha256"]
 
@@ -67,7 +75,7 @@ def load_config(path):
             f"round_interval_seconds must be at least {MIN_ROUND_INTERVAL_SECONDS}")
     require(isinstance(rounds, int) and 1 <= rounds <= MAX_ROUNDS, f"rounds must be 1-{MAX_ROUNDS}")
     urls = config.get("urls")
-    require(isinstance(urls, list) and urls, "urls must be a non-empty list")
+    require(isinstance(urls, list), "urls must be a list (empty for robots-only probes)")
     seen = set()
     for item in urls:
         url = item.get("url", "")
@@ -101,6 +109,41 @@ def runner_metadata(region, environ=None):
     return {"region": region or "unknown", "python": platform.python_version(),
             "platform": platform.platform(terse=True), "requests": requests.__version__,
             "runner": {name: environ[name] for name in METADATA_VARIABLES if environ.get(name)}}
+
+
+def diagnostic_metadata(environ=None) -> dict:
+    environ = os.environ if environ is None else environ
+    return {"urllib3": urllib3.__version__, "openssl": ssl.OPENSSL_VERSION, "ipv6_socket_support": socket.has_ipv6,
+            "proxy_environment_configured": any(value and name.lower() in {"http_proxy", "https_proxy", "all_proxy"}
+                                                for name, value in environ.items()),
+            "no_proxy_environment_configured": any(value and name.lower() == "no_proxy"
+                                                   for name, value in environ.items())}
+
+
+def ncaa_robots_only(config: dict) -> bool:
+    return config["hosts"] == ["stats.ncaa.org"] and not config["urls"] and config["rounds"] == 1
+
+
+def request_window(config: dict, start: str | None) -> tuple[datetime, datetime] | None:
+    if start is None:
+        return None
+    require(ncaa_robots_only(config), "An execution window is only supported for the one-request NCAA robots probe")
+    try:
+        parsed = datetime.strptime(start, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+    except ValueError:
+        raise ValueError("Window start must be UTC in the form YYYY-MM-DDTHH:MM:SSZ") from None
+    require(parsed.strftime("%Y-%m-%dT%H:%M:%SZ") == start, "Window start must be UTC in the form YYYY-MM-DDTHH:MM:SSZ")
+    return parsed, parsed + timedelta(seconds=REQUEST_WINDOW_SECONDS)
+
+
+def diagnostic_plan(config: dict, window: tuple[datetime, datetime] | None = None,
+                    timeout: int = PROBE_TIMEOUT_SECONDS) -> dict:
+    plan = {"request_config": {"method": "GET", "configured_headers": REQUEST_HEADERS.copy(),
+                              "timeout_seconds": timeout, "retries": 0,
+                              "follow_redirects": False if ncaa_robots_only(config) else "policy_checked"}}
+    if window:
+        plan["request_window_utc"] = {"start": window[0].isoformat(), "end_exclusive": window[1].isoformat()}
+    return plan
 
 
 def interleave(urls):
@@ -145,11 +188,17 @@ def plan_requests(config):
 
 class Probe:
     def __init__(self, config, *, environment, region="unknown", output="logs", session=None,
-                 clock=time.monotonic, sleep=time.sleep, environ=None, timeout=20):
+                 clock=time.monotonic, sleep=time.sleep, environ=None, timeout=PROBE_TIMEOUT_SECONDS,
+                 capture_diagnostics=False, network_provider=None, window: tuple[datetime, datetime] | None = None):
         require(bool(environment) and environment != "unspecified", "An environment label is required")
         self.config, self.environment = config, environment
         self.output = check_output(output)
+        self.window = window
         self.metadata = runner_metadata(region, environ)
+        if capture_diagnostics:
+            self.metadata.update(diagnostic_metadata(environ))
+            self.metadata["network_provider"] = network_provider
+            self.metadata.update(diagnostic_plan(config, window, timeout))
         self.run_id = f"{time.strftime('%Y%m%dT%H%M%SZ', time.gmtime())}-{uuid.uuid4().hex[:8]}"
         stem = f"access-probe-{environment}-{self.run_id}"
         self.log_path = self.output / f"{stem}.jsonl"
@@ -158,11 +207,11 @@ class Probe:
         self.sleep = sleep
         self.client = HttpClient("probe", log_path=self.log_path, session=session, timeout=timeout,
                                  retries=0, sleep=sleep, environment=environment,
-                                 allowed_hosts=config["hosts"])
+                                 allowed_hosts=config["hosts"], capture_diagnostics=capture_diagnostics)
         self.policies, self.robots, self.stopped, self.results = {}, {}, {}, []
 
-    def fetch(self, url):
-        result = self.client.fetch(url)
+    def fetch(self, url, *, follow_redirects=True):
+        result = self.client.fetch(url, follow_redirects=follow_redirects, request_window=self.window)
         # No cookies are kept between requests.
         cookies = getattr(self.client.session, "cookies", None)
         if hasattr(cookies, "clear"):
@@ -177,14 +226,14 @@ class Probe:
     def load_robots(self, host):
         self.pacer.wait(host)
         self.client.context = {"run_id": self.run_id, "kind": "robots", "host": host, "region": self.metadata["region"]}
-        self.client.url_policy = None
-        result = self.fetch(f"https://{host}/robots.txt")
+        self.client.url_policy = lambda url: urlsplit(url).hostname == host
+        result = self.fetch(f"https://{host}/robots.txt", follow_redirects=host not in POLICY_ONLY_HOSTS)
         report = result.report
         status, kind = report.get("status_code"), (report.get("content_type") or "").lower()
         rules = None
-        if status == 404:
+        if status == 404 and report.get("outcome") == "not_found":
             decision = "no_robots_file_allowed"
-        elif status == 200 and result.text is not None and kind == "text/plain":
+        elif status == 200 and result.text is not None and kind == "text/plain" and report.get("outcome") == "non_html_response":
             rules = RobotFileParser()
             rules.parse(result.text.splitlines())
             decision = "parsed"
@@ -192,6 +241,7 @@ class Probe:
             # 401/403/5xx, HTML instead of text, or a network error: do not crawl the host.
             decision = "unavailable_fail_closed"
         self.robots[host] = {"decision": decision, "status_code": status, "outcome": report.get("outcome"),
+                             "attempted": bool(report["attempts"]),
                              "sha256": (report.get("attempts") or [{}])[-1].get("body_sha256"),
                              "elapsed_seconds": report.get("elapsed_seconds")}
         self.policies[host] = (lambda url: True) if decision == "no_robots_file_allowed" else \
@@ -205,7 +255,8 @@ class Probe:
 
     def allowed(self, url):
         # Also used for redirects: nothing on a policy-only host is ever requested.
-        return urlsplit(url).hostname not in POLICY_ONLY_HOSTS and self.robots_allows(url)
+        host = urlsplit(url).hostname
+        return host not in POLICY_ONLY_HOSTS and host not in self.stopped and self.robots_allows(url)
 
     def probe_url(self, item, round_number):
         url, host = item["url"], urlsplit(item["url"]).hostname
@@ -213,13 +264,15 @@ class Probe:
                 "purpose": item["purpose"], "region": self.metadata["region"]}
         if host in self.stopped:
             record = {**base, "requested_url": safe_url(url), "environment": self.environment, "checked_at": utc_now(),
-                      "outcome": "skipped_host_stopped", "stopped_because": self.stopped[host], "target_requested": False}
+                      "outcome": "skipped_host_stopped", "classification": "not_requested",
+                      "stopped_because": self.stopped[host], "target_requested": False}
             self.log(record)
             return record
         if item.get("policy_only") or not self.allowed(url):
             robots_allows = self.robots_allows(url)
             record = {**base, "requested_url": safe_url(url), "environment": self.environment, "checked_at": utc_now(),
                       "outcome": "policy_only_not_requested" if robots_allows else "robots_disallowed",
+                      "classification": "not_requested" if robots_allows else "robots_policy_restriction",
                       "robots_decision": self.robots[host]["decision"], "robots_allows": robots_allows,
                       "policy_only": bool(item.get("policy_only")), "target_requested": False}
             self.log(record)
@@ -232,12 +285,17 @@ class Probe:
         report["target_requested"] = True
         if report["outcome"] in STOP_OUTCOMES or report.get("challenge_detected"):
             self.stopped[host] = report["outcome"]
+            self.stopped[urlsplit(report["final_url"]).hostname] = report["outcome"]
         return report
 
     def run(self):
         self.log({"run_id": self.run_id, "kind": "run_start", "environment": self.environment,
                   "started_at": utc_now(), "config_sha256": self.config["config_sha256"],
                   "plan": plan_requests(self.config), **self.metadata})
+        if self.window:
+            remaining = (self.window[0] - datetime.now(timezone.utc)).total_seconds()
+            if remaining > 0:
+                self.sleep(remaining)
         for host in self.config["hosts"]:
             self.load_robots(host)
         for round_number in range(1, self.config["rounds"] + 1):
@@ -252,7 +310,7 @@ class Probe:
         return summary
 
     def requests_sent(self):
-        return len(self.robots) + sum(bool(r.get("target_requested")) for r in self.results)
+        return sum(policy["attempted"] for policy in self.robots.values()) + sum(bool(r.get("target_requested")) for r in self.results)
 
     def write_summary(self):
         rows = []
@@ -275,4 +333,4 @@ class Probe:
             writer.writeheader()
             writer.writerows(rows)
         return {"run_id": self.run_id, "log": str(self.log_path), "summary": str(self.summary_path),
-                "requests_sent": self.requests_sent(), "stopped_hosts": self.stopped, "rows": rows}
+                "requests_sent": self.requests_sent(), "stopped_hosts": self.stopped, "robots": self.robots, "rows": rows}

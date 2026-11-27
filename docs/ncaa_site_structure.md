@@ -75,7 +75,7 @@ stops processing.
 | Teams without team pages | 8 teams on the D-I scoreboard and 13 on the D-III scoreboard had no `/teams/{id}` link | Their team ID stays blank; no ID is guessed |
 | Conference short names | Schools write "NESCAC" and "UAA"; the directory uses the full names | Declared `conference_aliases`; the CSV uses the directory name |
 | Session tokens in saved pages | Saved HTML contains CSRF/authenticity tokens and scripts | Raw saves stay in git-ignored `ankit/`; committed fixtures are sanitized (`sanitize-html`) |
-| Cloud access | From GitHub Actions even robots.txt returned HTTP 403 with a challenge page | See `docs/stage3_local_vs_cloud_report.md`; no workaround attempted |
+| Cloud access | From GitHub Actions, robots.txt returned an HTML HTTP 403 | See the [Phase 2 evidence review](stage3_local_vs_cloud_report.md#phase-2--http-403-root-cause-investigation) |
 
 ## Checks that tie the pages together (57 per game)
 

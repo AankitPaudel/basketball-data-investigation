@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "hosts": ["stats.ncaa.org"],
+  "urls": [],
+  "rounds": 1
+}

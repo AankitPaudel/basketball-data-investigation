@@ -213,6 +213,12 @@ delay and stop rules described there. The cloud run is the manual
 `.github/workflows/access-probe.yml` workflow; it sends requests only when its input is
 `APPROVED`.
 
+The [HTTP 403 review](docs/stage3_local_vs_cloud_report.md#phase-2--http-403-root-cause-investigation)
+rechecks the archived local and cloud records. Use `python -m src.main compare-probes LEFT.jsonl RIGHT.jsonl`
+to compare runs offline. The manual workflow defaults to a dry run of the one-request
+robots scope. See the [execution runbook](docs/stage3_access_test_plan.md#task-1b-execution-runbook)
+for the shared UTC window, reproduction and approval requirements.
+
 ## Diagnostics and saved HTML
 
 ```powershell

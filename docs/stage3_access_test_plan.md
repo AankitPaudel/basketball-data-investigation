@@ -1,5 +1,7 @@
 # Stage 3 — Local vs. cloud accessibility test plan
 
+For the current one-request diagnostics commands, see the [Task 1B execution runbook](#task-1b-execution-runbook).
+
 Status: **plan approved in principle. The probe and GitHub Actions workflow are built
 and tested offline. No Stage 3 network request has been sent; each run needs separate
 approval.**
@@ -173,5 +175,210 @@ Commands, to be run only after approval:
 .\benv\Scripts\python.exe -m src.main probe --execute --environment local-windows --region unknown --output logs/probe
 ```
 
-Cloud: push the repository to GitHub. Then go to **Actions → Stage 3 access probe
-(manual) → Run workflow** and type `APPROVED` only when that run has been approved.
+The current Actions workflow has a narrower scope. Use the [Task 1B execution runbook](#task-1b-execution-runbook).
+
+## Phase 2 — Diagnostic experiments
+
+The preceding sections preserve the original Stage 3 plan. Phase 2 uses archived
+records first and scopes any approved live run to one GET of
+`https://stats.ncaa.org/robots.txt` per approved environment. Agree on the comparison
+pair before any HTTP request, use the same revision and pinned dependencies, and
+schedule the captures close together in UTC. Use the ordinary network configuration
+and the existing research identity. Each environment stops after its first response or
+error. If a denial, challenge or rate limit arrives before the second capture has
+started, leave that capture pending until the administrator advises on the comparison.
+
+| ID | Objective and environment | Controls | Variable under review | Authorization | Expected observation | Actual observation and evidence | Status |
+|---|---|---|---|---|---|---|---|
+| E01 | Reconstruct the archived local and GitHub Actions baseline. | Same endpoint, configured GET/UA/Accept, Requests version and equivalent plan. | Environment, timing, status, type, redirect, body hash and duration. | Existing local files. | Establish whether status or response shape differs. | 200 local and 403 cloud, one attempt each, no redirects. Stage 3 probe JSONL, line 2 in both. | Complete, offline. |
+| E02 | Verify the existing local and cloud control requests and policy stops. | Same control URLs and rounds. | Whether the difference extends to other hosts or was followed by extra stats requests. | Existing local files. | Controls succeed and policy exclusions stay unsent. | 30 HTTP 200 target requests per environment, six matching control robots hashes, zero NCAA stats targets sent. Stage 3 JSONL and summary CSVs. | Complete, offline. |
+| E03 | Inspect available evidence for verification and provider indicators. | Same archived pair, legacy detector reviewed at the probe-era revision. | Definitive denial, verification clues and provider clues. | Existing local files. | A specific header, reference or response excerpt may distinguish the cases. | Legacy flag is broad. Body hashes and sizes survive; headers, bodies and references are absent. | Complete, offline. |
+| E04 | Compare any already-captured permitted browser observation with the same endpoint and network. | Endpoint, nearby UTC time and authorized route. | Client class. | Review existing sanitized captures only. A new browser request would need separate approval and a comparison purpose. | Same-endpoint evidence may identify client-associated behavior. | Existing operator saves are stats pages, with no comparable robots response. | Archive checked, comparison unavailable. |
+| E05 | Compare existing resolver and operator network records for both environments. | Same hostname, timestamps and matching evidence scope. | A/AAAA answers, routing, proxy applicability, provider or ASN. | Operator-provided records. A new DNS lookup requires approval under this plan. | Identify network differences with attributed evidence. | No historical resolver, peer, proxy or ASN records found. GitHub runner identity is recorded. | Archive checked, comparison unavailable. |
+| E06 | Capture one policy response per explicitly approved local and GitHub-hosted environment. | Same URL, GET, code, dependency versions, honest headers and close UTC timing. | Environment, prepared headers, DNS/peer and response signatures. | Explicit approval for endpoints, environments and time window. | A repeated status split and additional metadata can narrow the candidates. | No new capture. | Proposed, approval required. |
+| E07 | Request event attribution from the NCAA site administrator. | Archived UTC time, URL, UA, status and runner ID. | Handling tier, action, exact rule and policy. | Approval before sending an external inquiry. | Administrator can confirm the trigger if event data survive or sponsor a new capture. | Inquiry drafted in the report. | Proposed, unsent. |
+
+### Offline reproduction
+
+Run from the repository root with the existing environment. The 2026-11-17 JSONL
+archives under `logs/probe/` are git-ignored. Use the original logs or copies with the
+hashes in the [accessibility report](stage3_local_vs_cloud_report.md#source-files). The
+[generated comparison](stage3_probe_comparison.json) is available on its own when those
+archives are unavailable.
+
+```powershell
+$localProbe = 'logs/probe/access-probe-local-windows-20261117T091002Z-139ccdba.jsonl'
+$cloudProbe = 'logs/probe/access-probe-cloud-github-actions-ubuntu-20261117T170914Z-caec4a2d.jsonl'
+.\benv\Scripts\python.exe -m src.main compare-probes $localProbe $cloudProbe --output docs/stage3_probe_comparison.json
+.\benv\Scripts\python.exe -m src.main probe --config config/ncaa_robots_probe.json --capture-diagnostics --environment local-windows
+.\benv\Scripts\python.exe -m unittest discover -s tests -v
+.\benv\Scripts\python.exe -m src.main build-ncaa-games --plan config/ncaa_games_fixtures.json
+.\benv\Scripts\python.exe -m src.main combine-ncaa-games --plan config/ncaa_games_fixtures.json --output data/processed/fixture-rebuild/combined --expect-sha256 402921c1ad1bf0a74590ca360a972dc36eaf0ddb630e4a44651b17e9ec6df03f
+```
+
+`compare-probes LEFT RIGHT` reads one JSONL run per input and prints JSON to stdout
+unless `--output` is supplied. Older logs are supported. `--url` selects which URL gets
+attempt-level detail. Status/classification counts and source line references are
+included for every endpoint. A `null` means the value is unavailable, and an empty
+array can indicate an observed absence, such as a request without redirects. The
+legacy `challenge_detected` flag is preserved as `legacy_challenge_flag`. It has no
+effect on verification classification. The fixture rebuild normally exits 2 for the
+known Ferrum warnings. Check that all three games give `rebuild_match: true` before
+using the combined hash.
+
+## Task 1B execution runbook
+
+### 1. Prerequisites and authorization
+
+Use the Windows laptop and one GitHub-hosted Ubuntu runner from the same approved
+revision. Locally, use `git status --short` to check the probe code and config for
+local edits, verify `git rev-parse HEAD`, and use the dependencies in
+`requirements-tested.txt`. On GitHub the runner records `GITHUB_SHA`. The updated
+workflow must be available on GitHub before its dry run can be verified there. The
+workflow definition must exist on the default branch to receive manual dispatches.
+[GitHub manual dispatch documentation](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)
+
+Before executing, obtain explicit approval for both environments, one GET of
+`https://stats.ncaa.org/robots.txt` per environment, the accompanying resolver snapshot,
+the recorded metadata and the same two-minute UTC window. Ask the administrator to
+agree to that window if the archived event cannot be correlated. Confirm the ordinary
+network settings and that Requests has no site credentials configured for the endpoint.
+Coordinate both captures as one preapproved pair before either starts. Confirm both
+clocks are synchronized. A runner or laptop that misses the window needs a newly
+agreed window. A successful dry run is preparation for that approval.
+
+The scoped config fixes the URL, GET method, `BasketballDataResearch/0.1` user agent,
+`Accept: text/html`, 20-second Requests timeout, zero retries, no redirects and a shared
+JSONL schema. Match Requests and urllib3 versions in the two dry plans and verify the
+configured request fields. The Python patch, OS, OpenSSL build, hosted runner image,
+egress, resolver, edge route and proxy applicability may differ. Keep the usual network
+settings in both environments. A driver or runner change introduces another variable.
+
+### 2. Local dry run and passive checks
+
+From the Windows repository root, use the existing virtual environment.
+
+```powershell
+.\benv\Scripts\python.exe -m src.main probe --config config/ncaa_robots_probe.json --environment local-windows --capture-diagnostics
+$ipv4 = [System.Net.NetworkInformation.NetworkInterfaceComponent]::IPv4
+$ipv6 = [System.Net.NetworkInformation.NetworkInterfaceComponent]::IPv6
+[System.Net.NetworkInformation.NetworkInterface]::GetAllNetworkInterfaces() |
+    ForEach-Object { [pscustomobject]@{ State = $_.OperationalStatus; IPv4 = $_.Supports($ipv4); IPv6 = $_.Supports($ipv6) } } |
+    Group-Object State,IPv4,IPv6 | Select-Object Name,Count
+[DateTimeOffset]::UtcNow.ToString('o')
+```
+
+The dry run prints the OS, Python, OpenSSL, Requests and urllib3 versions, IPv6 socket
+support, proxy environment flags and the request plan. It performs no DNS or HTTP I/O.
+The interface summary shows local interface state. IPv6 socket support and interface
+state cannot establish external IPv6 reachability. Proxy flags report environment
+presence only. They do not identify which proxy, whether it was used, or whether Windows
+or the hosting platform supplies an additional proxy. OpenSSL version identifies the
+local library, while handshake details require separate evidence.
+
+For a cache-only Windows view, use the following commands. A cache miss only shows that
+the answer is unavailable from this cache. Review output privately before sharing.
+[Microsoft Resolve-DnsName documentation](https://learn.microsoft.com/en-us/powershell/module/dnsclient/resolve-dnsname?view=win10-ps)
+
+```powershell
+Resolve-DnsName -Name stats.ncaa.org -Type A -CacheOnly
+Resolve-DnsName -Name stats.ncaa.org -Type AAAA -CacheOnly
+```
+
+If a standalone resolver observation is authorized on either environment, use its
+Python interpreter from the repository root. This command may query the environment's
+resolver. It sends no HTTP request. The authorized cloud probe collects the same
+snapshot immediately before GET. The GitHub dry run omits the lookup.
+
+```text
+python -c "import json; from src.common.http_client import resolve_destination; print(json.dumps(resolve_destination('stats.ncaa.org'), indent=2))"
+```
+
+The resolver snapshot distinguishes IPv4 and IPv6 answers, redacts private addresses
+and reports resolver failures. Cached or different answers can reflect time, resolver
+or edge selection. A result alone cannot establish the selected socket peer, the
+actual routing path or a security decision. A connected peer may be a proxy or edge.
+Use existing authorized network inventory, provider-console data or an operator
+attestation for provider and ASN. If a value is verified, pass `--network-provider`
+or `--network-asn` with `--network-source` as listed by `probe --help`. Runner identity
+confirms GitHub hosting, and public address ranges cannot assign the specific runner's
+egress ASN. Leave unknown values unset. Keep public egress IP details in approved
+private channels if the administrator needs them for correlation.
+
+### 3. GitHub Actions dry run
+
+1. Open the repository's **Actions** tab and select **Stage 3 access probe (manual)**.
+2. Select **Run workflow** and choose the authorized revision. Leave
+   `approve_network_requests` at `no` and `window_start_utc` empty. Select **Run workflow**.
+3. Confirm the offline tests and the **Access probe plan** in the Summary. The plan
+   must show the single robots URL, `max_requests: 1` and `follow_redirects: false`.
+   The live step should be skipped. The dry run uploads `plan.json`. Checkout and
+   dependency installation contact GitHub and PyPI.
+
+### 4. Run the authorized pair
+
+After both approvals and a successful rehearsal, agree on one UTC start in
+`YYYY-MM-DDTHH:MM:SSZ` format. Dispatch the cloud workflow early enough to cover its
+observed dry-run setup time. Use `APPROVED` and that exact value for `window_start_utc`.
+The live step waits until the start if ready early. The exclusive end is 120 seconds
+later. GitHub re-runs skip the live step. Confirm the first run is approaching the
+live step before starting the local command. Cancel any pending counterpart if one
+environment has already reported a denial, rate limit or verification challenge and
+the counterpart has yet to send. Do not start a replacement run in that window.
+
+On the laptop, enter the same UTC start. The local command waits if invoked early.
+
+```powershell
+$windowStart = Read-Host 'Enter the approved UTC start (YYYY-MM-DDTHH:MM:SSZ)'
+.\benv\Scripts\python.exe -m src.main probe --config config/ncaa_robots_probe.json --environment local-windows --capture-diagnostics --window-start-utc $windowStart --output logs/phase2 --execute
+```
+
+The first time gate runs before the resolver snapshot. A second gate runs just
+before HTTP to cover DNS delays. A missed window returns exit 3 and records
+`window_closed` with zero HTTP attempts. The request-start timestamp is the time just
+before calling Requests and is the field to compare. A connection may complete after
+the window. The one-request run ends on any result, including 403, 429, challenge,
+redirect, backoff or connection failure. A 3xx is recorded with a redacted Location
+when usable and without following it. Keep the evidence and stop. Any follow-up needs
+fresh authorization. Use the configured identity and route throughout.
+
+### 5. Collect and compare the evidence
+
+The local command prints output paths under `logs/phase2/` for
+`access-probe-local-windows-<probe-id>.jsonl` and its `-summary.csv`. The CSV is
+header-only for the robots-only scope. JSONL is the primary evidence. GitHub writes
+`plan.json`, `result.json` if the live step ran, and
+`access-probe-cloud-github-actions-ubuntu-<probe-id>.jsonl` with its `-summary.csv`
+if the probe ran. On the completed run's **Summary** page, download
+`access-probe-logs-<github-run-id>-1` under **Artifacts**. Extract it under
+`logs/phase2/cloud/` and compare before the 30-day retention period ends.
+[GitHub artifact download documentation](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/download-workflow-artifacts)
+
+```powershell
+$localJsonl = Read-Host 'Enter the local probe JSONL path printed by the CLI'
+$cloudJsonl = Read-Host 'Enter the extracted cloud probe JSONL path'
+.\benv\Scripts\python.exe -m src.main compare-probes $localJsonl $cloudJsonl --output logs/phase2/comparison.json
+```
+
+1. Confirm both artifact revisions, configured request fields, window bounds and
+   one attempt on the same URL. Compare `request_start_gap_seconds` and both
+   `request_started_at` fields. Treat a missed window, stopped counterpart or absent
+   attempt as an incomplete pair. Use prepared headers to check observable request
+   differences. Raw config file hashes can differ because of line endings.
+2. Compare status, classification, redacted headers, DNS families, peer and body
+   size/hash. Body evidence is the allowlisted denial or verification markers and
+   recognized references. The hash covers the Requests-decoded body. Raw bodies,
+   cookies, credentials and proxy URLs are excluded. Header indicators and the
+   socket peer may be missing. A timeout or body-read failure can leave some fields
+   absent even if a status was received. `requests_sent` counts calls into the
+   HTTP client. A DNS, connection or TLS failure can prevent a call from reaching
+   NCAA.
+3. Apply the [H01–H09 interpretation matrix](stage3_local_vs_cloud_report.md#interpreting-a-fresh-pair).
+   Record the observed difference and the alternatives that still fit. A successful
+   reproduction supports environment association. Only correlated administrator
+   evidence can identify the specific rule.
+4. Send the [administrator inquiry](stage3_local_vs_cloud_report.md#draft-inquiry-to-the-ncaa-website-administrator)
+   only with authorization. Include the UTC attempt timestamp, endpoint, method, UA,
+   status, reference IDs, GitHub run and attempt, and sanitizer-approved headers.
+   Request the responding layer, event disposition and rule category. If logs are
+   unavailable, ask for an authorized capture window or authorized test environment.
